@@ -9,4 +9,10 @@ package com.lsj.leetcode;
  * @Createtine 2018/4/220:50
  */
 public class Info {
+    /**
+     * main method.
+     **/
+    public static void main(String[] args) {
+        System.out.println("Hello, LeetCode.");
+    }
 }

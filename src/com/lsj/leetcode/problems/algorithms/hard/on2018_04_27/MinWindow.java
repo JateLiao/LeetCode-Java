@@ -53,6 +53,7 @@ public class MinWindow {
                         String chr = String.valueOf(t.charAt(k));
                         if (!newTmpStr.contains(chr)) {
                             isMatched = false;
+                            break;
                         }
                         newTmpStr = newTmpStr.replaceFirst(chr, "");
                     }
@@ -67,7 +68,7 @@ public class MinWindow {
                     }
                 }
             }
-            System.out.println("单次耗时：" + (System.currentTimeMillis () - ss));
+            // System.out.println("单次耗时：" + (System.currentTimeMillis () - ss));
         }
         
         System.out.println("匹配子串总数据：" + suitCount);

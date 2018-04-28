@@ -29,6 +29,10 @@ public class MinWindow_MultiThread {
     public static void main(String[] args) throws Exception {
         String s = "wegdtzwabazduwwdysdetrrctotpcepalxdewzezbfewbabbseinxbqqplitpxtcwwhuyntbtzxwzyaufihclztckdwccpeyonumbpnuonsnnsjscrvpsqsftohvfnvtbphcgxyumqjzltspmphefzjypsvugqqjhzlnylhkdqmolggxvneaopadivzqnpzurmhpxqcaiqruwztroxtcnvhxqgndyozpcigzykbiaucyvwrjvknifufxducbkbsmlanllpunlyohwfsssiazeixhebipfcdqdrcqiwftutcrbxjthlulvttcvdtaiwqlnsdvqkrngvghupcbcwnaqiclnvnvtfihylcqwvderjllannflchdklqxidvbjdijrnbpkftbqgpttcagghkqucpcgmfrqqajdbynitrbzgwukyaqhmibpzfxmkoeaqnftnvegohfudbgbbyiqglhhqevcszdkokdbhjjvqqrvrxyvvgldtuljygmsircydhalrlgjeyfvxdstmfyhzjrxsfpcytabdcmwqvhuvmpssingpmnpvgmpletjzunewbamwiirwymqizwxlmojsbaehupiocnmenbcxjwujimthjtvvhenkettylcoppdveeycpuybekulvpgqzmgjrbdrmficwlxarxegrejvrejmvrfuenexojqdqyfmjeoacvjvzsrqycfuvmozzuypfpsvnzjxeazgvibubunzyuvugmvhguyojrlysvxwxxesfioiebidxdzfpumyon";
         String t = "ozgzyywxvtublcl";
+        
+        // s = "ADOBECODEBANC";
+        // t = "ABC";
+        
         long ss = System.currentTimeMillis ();
         System.err.println("最小覆盖子串：" + new MinWindow_MultiThread ().minWindow (s, t));
         
@@ -53,8 +57,8 @@ public class MinWindow_MultiThread {
         }
         
         
-        int poolSize = s.length () / 50;
-        ExecutorService service = Executors.newScheduledThreadPool (poolSize);
+        // int poolSize = s.length () / 50;
+        ExecutorService service = Executors.newScheduledThreadPool (10);
         for (int i = 0; i < s.length(); i++) {
             String tmpStr = s.substring (i, s.length ());
             service.execute (new Runnable () {
@@ -67,7 +71,8 @@ public class MinWindow_MultiThread {
         
         service.shutdown ();
         while (!service.isTerminated ()) {
-            Thread.sleep (TimeUnit.MILLISECONDS.toMillis (10));
+            System.out.println("等待五秒再说...");
+            Thread.sleep (TimeUnit.MILLISECONDS.toMillis (5000));
         }
         
         return this.minWindow;
@@ -87,6 +92,7 @@ public class MinWindow_MultiThread {
                         String chr = String.valueOf(this.target.charAt(k));
                         if (!newTmpStr.contains(chr)) {
                             isMatched = false;
+                            break;
                         }
                         newTmpStr = newTmpStr.replaceFirst(chr, "");
                     }

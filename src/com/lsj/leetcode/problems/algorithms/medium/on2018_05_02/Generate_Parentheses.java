@@ -29,12 +29,37 @@ public class Generate_Parentheses {
      * main method.
      **/
     public static void main(String[] args) {
-        List<String> pathes = generateParenthesis (3);
+        List<String> pathes = generateParenthesis (1);
+        System.out.println("所有括号组成：");
+        for (String st : pathes) {
+            System.out.println(st);
+        }
     }
     
     public static List<String> generateParenthesis(int n) {
+        if (n < 1) {
+            return null;
+        }
         List<String> parenthesis = new ArrayList<> ();
+        if (n == 1) {
+            parenthesis.add ("()");
+            return parenthesis;
+        }
         
+        /**
+         *
+         * 隐约觉得要用到递归
+         * 1.从左至右，连续的左括号数递增
+         * 2.所有左括号出现的位置遍历，其他位置补右括号
+         *   2.1 需要每个左括号之间相隔的空位数量，是2的倍数，可为0
+         */
+        
+        int len = n * 2;
+        int leftCount = 0; // 左括号数
+        String[] pthesArr = new String[len];
+        for (int i = 0; i < n; i++) {
+        
+        }
         
         return parenthesis;
     }

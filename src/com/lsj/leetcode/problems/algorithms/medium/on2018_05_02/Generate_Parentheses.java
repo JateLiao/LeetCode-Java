@@ -48,7 +48,6 @@ public class Generate_Parentheses {
         
         /**
          *
-         * 隐约觉得要用到递归
          * 1.从左至右，连续的左括号数递增
          * 2.所有左括号出现的位置遍历，其他位置补右括号
          *   2.1 需要每个左括号之间相隔的空位数量，是2的倍数，可为0
@@ -59,7 +58,7 @@ public class Generate_Parentheses {
         int len = n * 2;
         int leftCount = 0; // 左括号数
         for (int i = 0; i < n; i++) {
-            String[] pthesArr = {"{","#","#","#","#","#"};
+            String[] pthesArr = new String[len];
             
         }
         

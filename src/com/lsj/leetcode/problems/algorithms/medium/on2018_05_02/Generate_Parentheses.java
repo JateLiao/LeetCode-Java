@@ -56,9 +56,9 @@ public class Generate_Parentheses {
         
         int len = n * 2;
         int leftCount = 0; // 左括号数
-        String[] pthesArr = new String[len];
         for (int i = 0; i < n; i++) {
-        
+            String[] pthesArr = {"{","#","#","#","#","#"};
+            
         }
         
         return parenthesis;

@@ -39,6 +39,16 @@ public class Generate_Parentheses {
     private static  final char LEFT_PATHE = '(';
     private static  final char RIGHT_PATHE = ')';
     
+    
+    /**
+     *
+     * 1.从左至右，连续的左括号数递增
+     * 2.所有左括号出现的位置遍历，其他位置补右括号
+     *   2.1 需要每个左括号之间相隔的空位数量，是2的倍数，可为0
+     *   2.2 第一个只能为左括号，最后一个只能为右括号，且不能最后为两个连续的左括号紧接着最后的有括号
+     *   2.3 1到n-1；从1开始，到2到3，
+     *   2.4 左括号开头
+     */
     public static List<String> generateParenthesis(int n) {
         if (n < 1) {
             return null;
@@ -48,31 +58,35 @@ public class Generate_Parentheses {
             parenthesis.add ("()");
             return parenthesis;
         }
-        
-        /**
-         *
-         * 1.从左至右，连续的左括号数递增
-         * 2.所有左括号出现的位置遍历，其他位置补右括号
-         *   2.1 需要每个左括号之间相隔的空位数量，是2的倍数，可为0
-         *   2.2 第一个只能为左括号，最后一个只能为右括号，且不能最后为两个连续的左括号紧接着最后的有括号
-         *   2.3 1到n-1；从1开始，到2到3，
-         *   2.4 左括号开头
-         */
+        if (n == 2) {
+            parenthesis.add ("()()");
+            parenthesis.add ("(())");
+            return parenthesis;
+        }
         
         int len = n * 2;
         int leftCount = 0; // 左括号数
-        
-        for (int i = 0; i < 3; i++) {
+    
+        for (int i = 1; i <= 2; i++) { // 左括号的开头序号：01；02，也就是12,13
             char[] pthesArr = new char[len];
             pthesArr[0] = LEFT_PATHE;
             pthesArr[i] = LEFT_PATHE;
-            for (int j = 0; j < len; j++) {
-                leftCount = 0;
-                
+            leftCount = 2;
+            int count = 2;
+            int startIdx = i + 1;
+
+            // 有多少层循环，取决于n
+            
+            do {
+            
+            } while(count <= n);
+            
+            for (int j = i + 1; j < len - 1; j++) {
+
                 if (pthesArr[len -2] == LEFT_PATHE && pthesArr[len -3] == LEFT_PATHE) { // 过滤不符合的组合：不能最后为两个连续的左括号紧接着最后的有括号
                     continue;
                 }
-                
+
                 if (++leftCount == n) { // 填充右括号
                     fillRightPathes(pthesArr);
                     parenthesis.add (String.valueOf (pthesArr));
@@ -86,7 +100,7 @@ public class Generate_Parentheses {
     
     private static void  fillRightPathes(char[] arr){
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = arr[0] == LEFT_PATHE ? LEFT_PATHE : RIGHT_PATHE;
+            arr[i] = arr[i] == LEFT_PATHE ? LEFT_PATHE : RIGHT_PATHE;
         }
     }
 }

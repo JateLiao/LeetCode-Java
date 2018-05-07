@@ -29,7 +29,7 @@ public class Generate_Parentheses {
      * main method.
      **/
     public static void main(String[] args) {
-        List<String> pathes = generateParenthesis (2);
+        List<String> pathes = generateParenthesis (3);
         System.out.println("所有括号组成：");
         for (String st : pathes) {
             System.out.println(st);
@@ -65,34 +65,48 @@ public class Generate_Parentheses {
         }
         
         int len = n * 2;
+        int[] idxArr = new int[len];
+        for (int i = 0; i < len; i++) {
+            idxArr[i] = i;
+        }
         int leftCount = 0; // 左括号数
     
         for (int i = 1; i <= 2; i++) { // 左括号的开头序号：01；02，也就是12,13
-            char[] pthesArr = new char[len];
-            pthesArr[0] = LEFT_PATHE;
-            pthesArr[i] = LEFT_PATHE;
             leftCount = 2;
             int count = 2;
             int startIdx = i + 1;
+            int leftCapacity = n - 2; // 剩余的空间
 
             // 有多少层循环，取决于n
-            
             do {
-            
-            } while(count <= n);
-            
-            for (int j = i + 1; j < len - 1; j++) {
-
-                if (pthesArr[len -2] == LEFT_PATHE && pthesArr[len -3] == LEFT_PATHE) { // 过滤不符合的组合：不能最后为两个连续的左括号紧接着最后的有括号
-                    continue;
+                for (int j = startIdx; j < len; j++) {
+                    char[] pthesArr = new char[len];
+                    pthesArr[0] = LEFT_PATHE;
+                    pthesArr[i] = LEFT_PATHE;
+                    pthesArr[j] = LEFT_PATHE;
+                    startIdx++;
+                    // leftCapacity--;
+                    if (++leftCount >= n) {
+                        leftCount = 2;
+                        fillRightPathes(pthesArr);
+                        parenthesis.add (String.valueOf (pthesArr));
+                        break;
+                    }
                 }
-
-                if (++leftCount == n) { // 填充右括号
-                    fillRightPathes(pthesArr);
-                    parenthesis.add (String.valueOf (pthesArr));
-                    break;
-                }
-            }
+                leftCapacity--;
+            } while(count <= n && leftCapacity > 0);
+            
+//            for (int j = i + 1; j < len - 1; j++) {
+//                if (pthesArr[len -2] == LEFT_PATHE && pthesArr[len -3] == LEFT_PATHE) { // 过滤不符合的组合：不能最后为两个连续的左括号紧接着最后的有括号
+//                    continue;
+//                }
+//
+//                if (++leftCount == n) { // 填充右括号
+//                    fillRightPathes(pthesArr);
+//                    parenthesis.add (String.valueOf (pthesArr));
+//                    break;
+//                }
+//            }
         }
         
         return parenthesis;

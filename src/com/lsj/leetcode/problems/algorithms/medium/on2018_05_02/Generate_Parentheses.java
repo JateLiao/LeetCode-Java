@@ -3,27 +3,18 @@ package com.lsj.leetcode.problems.algorithms.medium.on2018_05_02;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * @Title: ${FILE_NAME}
- * @Company: com.lsj
- * @Package com.lsj.leetcode.problems.algorithms.medium.on2018_05_02
- * @Description: ${TODO}
- * @Author liao
- * @Createtine 2018/5/223:26
+ * 括号生成
+ * 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+ * 例如，给出 n = 3，生成结果为：
+ * ["((()))",
+ *   "(()())",
+ *   "(())()",
+ *   "()(())",
+ *   "()()()"]
  */
 public class Generate_Parentheses {
-    /**
-     * 括号生成
-     * 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
-     * 例如，给出 n = 3，生成结果为：
-     * [
-     *   "((()))",
-     *   "(()())",
-     *   "(())()",
-     *   "()(())",
-     *   "()()()"
-     * ]
-     */
     
     /**
      * main method.
@@ -41,7 +32,6 @@ public class Generate_Parentheses {
     
     
     /**
-     *
      * 1.从左至右，连续的左括号数递增
      * 2.所有左括号出现的位置遍历，其他位置补右括号
      *   2.1 需要每个左括号之间相隔的空位数量，是2的倍数，可为0

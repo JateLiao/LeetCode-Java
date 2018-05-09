@@ -21,7 +21,7 @@ public class Generate_Parentheses {
      * main method.
      **/
     public static void main(String[] args) {
-        int n = 5;
+        int n = 3;
         List<String> pathes = generateParenthesis (n);
         System.out.println("括号组成数量：" + pathes.size ());
         System.out.println("所有括号组成：");
@@ -69,20 +69,22 @@ public class Generate_Parentheses {
                 pthesArr[0] = LEFT_PATHE;
                 pthesArr[i] = LEFT_PATHE;
     
-                for (int k = 0; k < centerCount; k++) {
-                    endIdx = index + k;
-                    // System.err.println(endIdx);
-                    pthesArr[endIdx] = LEFT_PATHE;
-                }
-    
-                for (int k = endIdx + 1; k < len - 1; k++) {
-                    char[] tmpArr = Arrays.copyOf (pthesArr, len);
-                    tmpArr[k] = LEFT_PATHE;
-                    if (tmpArr[len - 3] == LEFT_PATHE && tmpArr[len - 2] == LEFT_PATHE) {
-                        continue;
+                for (int p = 0; p < centerCount; p++) {
+                    for (int k = 0; k < centerCount; k++) {
+                        endIdx = index + k;
+                        // System.err.println(endIdx);
+                        pthesArr[endIdx] = LEFT_PATHE;
                     }
-                    fillRightPathes(tmpArr);
-                    parenthesis.add (String.valueOf (tmpArr));
+    
+                    for (int k = endIdx + 1; k < len - 1; k++) {
+                        char[] tmpArr = Arrays.copyOf (pthesArr, len);
+                        tmpArr[k] = LEFT_PATHE;
+                        if (tmpArr[len - 3] == LEFT_PATHE && tmpArr[len - 2] == LEFT_PATHE) {
+                            continue;
+                        }
+                        fillRightPathes(tmpArr);
+                        parenthesis.add (String.valueOf (tmpArr));
+                    }
                 }
             }
         }

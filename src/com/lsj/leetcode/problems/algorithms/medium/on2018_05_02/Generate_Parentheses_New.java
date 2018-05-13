@@ -22,7 +22,7 @@ public class Generate_Parentheses_New {
      * main method.
      **/
     public static void main(String[] args) {
-        int n = 100;
+        int n = 5;
         List<String> pathes = generateParenthesis (n);
         System.out.println ("括号组成数量：" + pathes.size ());
         System.out.println ("所有括号组成：");
@@ -66,20 +66,24 @@ public class Generate_Parentheses_New {
             pthesArr[0] = LEFT_PATHE;
             pthesArr[i] = LEFT_PATHE;
             if (centreCount == 0 || n == 3) { // 当n=3
-                completePathes (parenthesis, pthesArr, i + 1, len - 2);
+                completePathes (parenthesis, pthesArr,   i + 1, len - 2);
                 fillRightPathes (pthesArr);
                 continue;
             }
             for (int j = 0; j < n; j++) { // 3,4,
                 int index = i + j + 1;
-                char[] tmpArr = Arrays.copyOf (pthesArr, pthesArr.length);
-                // 补充到倒数第二个位置
-                int count = 0;
                 do {
-                    tmpArr[index] = LEFT_PATHE;
-                    index++;
-                } while (++count < centreCount);
-                completePathes (parenthesis, tmpArr, index, len - 2);
+                    int last2ndIndex = 4;
+                    char[] tmpArr = Arrays.copyOf (pthesArr, pthesArr.length);
+                    // 补充到倒数第二个位置
+                    int count = 0;
+                    do {
+                        tmpArr[index] = LEFT_PATHE;
+                        index++;
+                    } while (++count < centreCount);
+                    completePathes (parenthesis, tmpArr, index, len - 2);
+                    break;
+                } while (true);
             }
         }
         /************************************************************************************************************************/

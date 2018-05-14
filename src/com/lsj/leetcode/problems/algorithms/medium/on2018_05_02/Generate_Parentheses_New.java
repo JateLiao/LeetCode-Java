@@ -71,9 +71,17 @@ public class Generate_Parentheses_New {
                 continue;
             }
             for (int j = 0; j < n; j++) { // 3,4,
+    
+                for (int k = centreCount; k > 0; k--) { //
+                    int lastStartIndex = i + centreCount;
+                    for (int l = lastStartIndex; l < len - 2 - 1; l++) {
+                    
+                    }
+                }
+                
+                /** 最后一个位置的填充补全 */
                 int index = i + j + 1;
                 do {
-                    int last2ndIndex = 4;
                     char[] tmpArr = Arrays.copyOf (pthesArr, pthesArr.length);
                     // 补充到倒数第二个位置
                     int count = 0;

@@ -61,7 +61,7 @@ public class Generate_Parentheses {
         int len = n * 2;
         // Stack<Character> stack = new Stack<> ();
         for (int i = 1; i <= 2; i++) { // 左括号的开头序号：01；02，也就是12,13
-            int centreCount = n - 2 - 1; // 中间需要处理的数量，末尾一位固定用来遍历
+            int centreCount = n - 2 - 1; //   中间需要处理的数量，末尾一位固定用来遍历
             char[] pthesArr = new char[len];
             pthesArr[0] = LEFT_PATHE;
             pthesArr[i] = LEFT_PATHE;

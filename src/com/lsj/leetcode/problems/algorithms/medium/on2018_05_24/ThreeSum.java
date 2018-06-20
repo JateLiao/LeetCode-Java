@@ -23,22 +23,32 @@ public class ThreeSum {
      * ]
      */
     public static void main(String[] args) {
-        int[] nums = {-1, 0, 1, 2, -1, -4, 4, 0, 1, -2, 3, -1, -3};
+        // -1, 0, 1, 2, -1, -4, 4, 0, 1, -2, 3, -1, -3
+        // -1, 0, 1, 2, -1, -4
+        int[] nums = {-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
         List<List<Integer>> values = new ThreeSum ().threeSum (nums);
         
         System.out.println(values);
     }
     
     public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> results = new ArrayList<> ();
         if (null == nums || nums.length < 3) {
-            return null;
+            return results;
         }
         
         int len = nums.length;
-        List<List<Integer>> results = new ArrayList<> ();
+        if (len == 3 && nums[0] + nums[1] + nums[2] == 0) {
+            List<Integer> tmpVals = new ArrayList<> ();
+            tmpVals.add (nums[0]);
+            tmpVals.add (nums[1]);
+            tmpVals.add (nums[2]);
+            results.add (tmpVals);
+            return results;
+        }
         List<Set<Integer>> existVlues = new ArrayList<> ();
-        for (int i = 0; i < len - 3; i++) {
-            for (int j = i + 1; j < nums.length - 2; j++) {
+        for (int i = 0; i <= len - 3; i++) {
+            for (int j = i + 1; j <= nums.length - 2; j++) {
                 for (int k = j + 1; k < nums.length; k++) {
                     if (nums[i] + nums[j] + nums[k] == 0) {
                         Set<Integer> existVal = new HashSet<> (3);
@@ -60,8 +70,6 @@ public class ThreeSum {
             }
         }
     
-        Iterator<List<Integer>> iterator = results.iterator ();
-        
         return results;
     }
     
@@ -74,6 +82,14 @@ public class ThreeSum {
         }
         boolean isExist = false;
         for (Set<Integer> existSet : existVlues) {
+            if (i == j && i == 0) {
+                if (existSet.contains (i) && existSet.size () == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+                
+            }
             if (existSet.contains (i) && existSet.contains (j) && existSet.contains (k)) {
                 return true;
             }

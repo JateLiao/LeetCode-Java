@@ -32,6 +32,37 @@ public class IsNumber {
     public boolean isNumber(String s) {
         boolean res = false;
         
+        if (null == s) {
+            return res;
+        }
+        s = s.trim ();
+        if (s.isEmpty ()) {
+            return res;
+        }
+        
+        char[] arr = s.toCharArray ();
+        int pointCount = 0; // 小数点数量
+        int eCount = 0;
+        for (char c : arr) {
+            
+            
+            /** 小数点判断 */
+            if (c == '.') {
+                pointCount++;
+            }
+            if (pointCount > 1) {
+                return false;
+            }
+    
+            /** 字符 e 判断 */
+            if (c == 'e') {
+                eCount++;
+            }
+            if (eCount > 1) {
+                return false;
+            }
+        }
+        
         return res;
     }
 }

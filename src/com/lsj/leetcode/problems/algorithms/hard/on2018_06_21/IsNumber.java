@@ -1,5 +1,8 @@
 package com.lsj.leetcode.problems.algorithms.hard.on2018_06_21;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @Desc IsNumber
  * @ProjectName LeetCode-Java
@@ -23,12 +26,13 @@ public class IsNumber {
      *
      */
     public static void main(String[] args) {
-        String string = "";
+        String string = "  -0.5 ";
         long s = System.currentTimeMillis ();
         boolean values = new IsNumber ().isNumber (string);
         System.err.println("IsNumber：" + values);
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
+    
     public boolean isNumber(String s) {
         boolean res = false;
         
@@ -39,12 +43,21 @@ public class IsNumber {
         if (s.isEmpty ()) {
             return res;
         }
+    
+        Set<Character> validSet = new HashSet<> (127);
+        for (int i = 0; i < 127; i++) {
+            if ((i >= 48 && i <= 57) || i == 46 || i == 45 || i == 69 || i == 101) {
+                validSet.add ((char)i);
+            }
+        }
         
         char[] arr = s.toCharArray ();
         int pointCount = 0; // 小数点数量
         int eCount = 0;
         for (char c : arr) {
-            
+            if (!validSet.contains (c)) {
+                return false;
+            }
             
             /** 小数点判断 */
             if (c == '.') {
@@ -55,13 +68,14 @@ public class IsNumber {
             }
     
             /** 字符 e 判断 */
-            if (c == 'e') {
+            if (c == 'e' || c == 'E') {
                 eCount++;
             }
             if (eCount > 1) {
                 return false;
             }
         }
+        res = true;
         
         return res;
     }

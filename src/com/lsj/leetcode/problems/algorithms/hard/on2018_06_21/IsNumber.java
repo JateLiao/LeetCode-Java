@@ -26,7 +26,7 @@ public class IsNumber {
      *
      */
     public static void main(String[] args) {
-        String string = "  -0.5 ";
+        String string = "e";
         long s = System.currentTimeMillis ();
         boolean values = new IsNumber ().isNumber (string);
         System.err.println("IsNumber：" + values);
@@ -34,14 +34,19 @@ public class IsNumber {
     }
     
     public boolean isNumber(String s) {
-        boolean res = false;
-        
         if (null == s) {
-            return res;
+            return false;
         }
         s = s.trim ();
         if (s.isEmpty ()) {
-            return res;
+            return false;
+        }
+    
+        if (s.startsWith ("e|E") || s.endsWith ("e") || s.endsWith ("E")) {
+            return false;
+        }
+        if (s.length () == 1 && (((int)s.charAt (0)) < 48 || ((int)s.charAt (0)) > 57)) { // e开头或结尾
+            return false;
         }
     
         Set<Character> validSet = new HashSet<> (127);
@@ -75,8 +80,6 @@ public class IsNumber {
                 return false;
             }
         }
-        res = true;
-        
-        return res;
+        return true;
     }
 }

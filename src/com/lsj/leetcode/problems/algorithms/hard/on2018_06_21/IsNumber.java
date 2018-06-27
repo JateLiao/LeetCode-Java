@@ -26,7 +26,7 @@ public class IsNumber {
      *
      */
     public static void main(String[] args) {
-        String string = "-1.";
+        String string = "2e0";
         long s = System.currentTimeMillis ();
         boolean values = new IsNumber ().isNumber (string);
         System.err.println("测试字符串：" + string);
@@ -56,7 +56,7 @@ public class IsNumber {
                 validSet.add ((char)i);
                 numSet.add ((char)i);
             }
-            if (i == 46 || i == 45 || i == 69 || i == 101) {
+            if (i == 43 || i == 46 || i == 45 || i == 69 || i == 101) {
                 validSet.add ((char)i);
             }
         }
@@ -67,8 +67,13 @@ public class IsNumber {
         int eCount = 0;
         int validCount = 0;
         int numCount = 0;
+        int numCountAfterE = 0;
         int index = 1;
         for (char c : arr) {
+            if (index == 1 && (c == '-' || c == '+')) { // 正负号
+                index++;
+                continue;
+            }
             /** 开头结尾字符判断 */
             if ((index == 1 || index == len) && isWrongBE (c)) {
                 return false;
@@ -77,13 +82,16 @@ public class IsNumber {
                 return false;
             }
             
-            /** - */
-            if (index != 1 && c == '-') {
+            /** -/+ */
+            if (index != 1 && arr[index - 1 - 1] != 'e' && arr[index - 1 - 1] != 'E' && (c == '-' || c == '+')) {
                 return false;
             }
             
             /** 小数点判断 */
             if (c == '.') {
+                if (eCount > 0) { // e后面不能出现小数点
+                    return false;
+                }
                 pointCount++;
             }
             if (pointCount > 1) {
@@ -102,12 +110,13 @@ public class IsNumber {
                 return false;
             }
             if (numSet.contains (c)) {
+                numCountAfterE = eCount > 0 ? ++numCountAfterE : numCountAfterE;
                 numCount++;
             }
             index++;
             validCount++;
         }
-        if (validCount < 1) {
+        if (validCount < 1 || numCount < 1 || (eCount > 0 && numCountAfterE < 1)) {
             return false;
         }
         return true;

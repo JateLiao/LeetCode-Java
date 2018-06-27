@@ -26,12 +26,15 @@ public class IsNumber {
      *
      */
     public static void main(String[] args) {
-        String string = "e";
+        String string = "-1.";
         long s = System.currentTimeMillis ();
         boolean values = new IsNumber ().isNumber (string);
+        System.err.println("测试字符串：" + string);
         System.err.println("IsNumber：" + values);
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
+    
+    private static final char[] WRONG_BE_CHARS= {'e', 'E'};
     
     public boolean isNumber(String s) {
         if (null == s) {
@@ -41,26 +44,41 @@ public class IsNumber {
         if (s.isEmpty ()) {
             return false;
         }
-    
-        if (s.startsWith ("e|E") || s.endsWith ("e") || s.endsWith ("E")) {
-            return false;
-        }
+     
         if (s.length () == 1 && (((int)s.charAt (0)) < 48 || ((int)s.charAt (0)) > 57)) { // e开头或结尾
             return false;
         }
     
         Set<Character> validSet = new HashSet<> (127);
+        Set<Character> numSet = new HashSet<> (10);
         for (int i = 0; i < 127; i++) {
-            if ((i >= 48 && i <= 57) || i == 46 || i == 45 || i == 69 || i == 101) {
+            if ((i >= 48 && i <= 57)) {
+                validSet.add ((char)i);
+                numSet.add ((char)i);
+            }
+            if (i == 46 || i == 45 || i == 69 || i == 101) {
                 validSet.add ((char)i);
             }
         }
         
         char[] arr = s.toCharArray ();
+        int len = '.' == arr[arr.length - 1] ? arr.length - 1 : arr.length;
         int pointCount = 0; // 小数点数量
         int eCount = 0;
+        int validCount = 0;
+        int numCount = 0;
+        int index = 1;
         for (char c : arr) {
+            /** 开头结尾字符判断 */
+            if ((index == 1 || index == len) && isWrongBE (c)) {
+                return false;
+            }
             if (!validSet.contains (c)) {
+                return false;
+            }
+            
+            /** - */
+            if (index != 1 && c == '-') {
                 return false;
             }
             
@@ -71,15 +89,36 @@ public class IsNumber {
             if (pointCount > 1) {
                 return false;
             }
+            if (index == 1 && c == '.') { // 小数点开头
+                index++;
+                continue;
+            }
     
             /** 字符 e 判断 */
             if (c == 'e' || c == 'E') {
                 eCount++;
             }
-            if (eCount > 1) {
+            if ((eCount>0 && numCount < 1) || eCount > 1) {
                 return false;
             }
+            if (numSet.contains (c)) {
+                numCount++;
+            }
+            index++;
+            validCount++;
+        }
+        if (validCount < 1) {
+            return false;
         }
         return true;
+    }
+    
+    private boolean isWrongBE(char s) {
+        for (int i = 0; i < WRONG_BE_CHARS.length; i++) {
+            if (s == WRONG_BE_CHARS[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 }

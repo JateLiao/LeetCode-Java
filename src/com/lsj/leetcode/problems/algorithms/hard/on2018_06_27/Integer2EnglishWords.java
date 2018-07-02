@@ -1,5 +1,7 @@
 package com.lsj.leetcode.problems.algorithms.hard.on2018_06_27;
 
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
+
 /**
  * @Desc Integer2EnglishWords
  * @ProjectName LeetCode-Java
@@ -34,17 +36,17 @@ public class Integer2EnglishWords {
      */
     public static void main(String[] args) {
         int num = 100024554;
+        System.err.println("测试数字：" + num);
         long s = System.currentTimeMillis ();
         String values = new Integer2EnglishWords ().numberToWords (num);
-        System.err.println("测试数字：" + num);
         System.err.println("numberToWords：" + values);
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
     
-    private static final String[] NUM_ARR = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
-    private static final String[] NUM_TENS_ARR = {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
-    private static final String[] NUM_TENS_JR_ARR = {"Eleven", "Twelve", "Thirteen", "Forteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
-    private static final String[] UNIT_ARR = {"Hundred", "Thousand", "Million", "Billion"};
+    private static final String[] NUM_ARR = {"Zero ", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine "};
+    private static final String[] NUM_TENS_ARR = {"Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety "};
+    private static final String[] NUM_TENS_JR_ARR = {"Ten ", "Eleven ", "Twelve ", "Thirteen ", "Forteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "};
+    private static final String[] UNIT_ARR = {"Hundred ", "Thousand ", "Million ", "Billion "};
 
     public String numberToWords(int num) {
         if (num < 0 || num > Integer.MAX_VALUE) {
@@ -68,23 +70,31 @@ public class Integer2EnglishWords {
             
             int lenSub = numSub.length ();
             char[] arr = numSub.toCharArray ();
-            for (int j = 0; j < arr[i]; j++) {
-                char c = arr[i];
+            for (int j = 0; j < numSub.length (); j++) {
+                char c = arr[j];
                 if (c == '0') {
+                    --lenSub;
                     continue;
                 }
-                valueSb.append (NUM_ARR[Integer.valueOf (String.valueOf (c))]);
+                int numVal = Integer.valueOf (String.valueOf (c));
                 if (lenSub == 3) {
-                    valueSb.append (UNIT_ARR[0]);
+                    valueSb.append (NUM_ARR[numVal]).append (UNIT_ARR[0]);
                 } else if (lenSub == 2 && c != '0') {
-                    valueSb.append (UNIT_ARR[0]);
+                    if (numVal == 1)  { // 10+
+                        valueSb.append (NUM_TENS_JR_ARR[Integer.valueOf (String.valueOf (arr[i + 1]))]);
+                        break;
+                    } else {
+                        valueSb.append (NUM_TENS_ARR[numVal - 2]);
+                    }
                 } else if (lenSub == 1 && c != '0') {
-                    valueSb.append (NUM_ARR[Integer.valueOf (String.valueOf (c))]);
+                    valueSb.append (NUM_ARR[numVal]);
                 }
                 --lenSub;
             }
+            value = valueSb.toString () + UNIT_ARR[i + 1] + value;
+            valueSb.setLength (0); // 清空
         }
         
-        return valueSb.toString ();
+        return value;
     }
 }

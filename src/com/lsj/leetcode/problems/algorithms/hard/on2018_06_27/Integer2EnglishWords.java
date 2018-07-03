@@ -35,7 +35,7 @@ public class Integer2EnglishWords {
      *
      */
     public static void main(String[] args) {
-        int num = 1025648795;
+        int num = 1;
         System.err.println("测试数字：" + num);
         long s = System.currentTimeMillis ();
         String values = new Integer2EnglishWords ().numberToWords (num);
@@ -45,7 +45,7 @@ public class Integer2EnglishWords {
     
     private static final String[] NUM_ARR = {"Zero ", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine "};
     private static final String[] NUM_TENS_ARR = {"Twenty ", "Thirty ", "Forty ", "Fifty ", "Sixty ", "Seventy ", "Eighty ", "Ninety "};
-    private static final String[] NUM_TENS_JR_ARR = {"Ten ", "Eleven ", "Twelve ", "Thirteen ", "Forteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "};
+    private static final String[] NUM_TENS_JR_ARR = {"Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "};
     private static final String[] UNIT_ARR = {"", "Thousand ", "Million ", "Billion "};
     private static final String HUNDRED = "Hundred ";
 
@@ -54,6 +54,9 @@ public class Integer2EnglishWords {
             return null;
         }
         String numStr = String.valueOf (num);
+        if (numStr.length () == 1) { // 个位数直接返回
+            return NUM_ARR[num].trim ();
+        }
         int len = numStr.length ();
         String[] numArr = new String[len % 3 == 0 ? len / 3 :  len / 3 + 1]; // 三位数字数组
         int lenArr = numArr.length;

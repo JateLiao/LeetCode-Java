@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problems.algorithms.medium.on2018_05_02;
+package com.lsj.leetcode.problemset.algorithms.medium.on2018_05_02;
 
 import java.util.ArrayList;
 import java.util.Arrays;

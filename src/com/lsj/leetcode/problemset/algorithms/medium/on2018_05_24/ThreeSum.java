@@ -1,11 +1,11 @@
-package com.lsj.leetcode.problems.algorithms.medium.on2018_05_24;
+package com.lsj.leetcode.problemset.algorithms.medium.on2018_05_24;
 
 import java.util.*;
 
 /**
  * @Title: ${FILE_NAME}
  * @Company: com.lsj
- * @Package com.lsj.leetcode.problems.algorithms.medium.on2018_05_24
+ * @Package com.lsj.leetcode.problemset.algorithms.medium.on2018_05_24
  * @Description: ${TODO}
  * @Author liao
  * @Createtine 2018/5/2423:45

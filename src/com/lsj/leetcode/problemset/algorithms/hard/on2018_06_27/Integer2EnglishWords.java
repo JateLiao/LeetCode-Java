@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problems.algorithms.hard.on2018_06_27;
+package com.lsj.leetcode.problemset.algorithms.hard.on2018_06_27;
 
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 

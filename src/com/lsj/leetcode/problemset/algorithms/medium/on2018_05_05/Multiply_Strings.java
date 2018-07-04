@@ -1,9 +1,9 @@
-package com.lsj.leetcode.problems.algorithms.medium.on2018_05_05;
+package com.lsj.leetcode.problemset.algorithms.medium.on2018_05_05;
 
 /**
  * @Title: ${FILE_NAME}
  * @Company: com.lsj
- * @Package com.lsj.leetcode.problems.algorithms.medium.on2018_05_05
+ * @Package com.lsj.leetcode.problemset.algorithms.medium.on2018_05_05
  * @Description: ${TODO}
  * @Author liao
  * @Createtine 2018/5/510:32

@@ -37,6 +37,22 @@ public class NumReverse {
     }
     
     public int reverse(int x) {
+        String numStr = String.valueOf (x);
+        StringBuilder reverseVal = new StringBuilder ("");
+        
+        char firstChar = numStr.charAt (0); // 符号位
+        if (firstChar == '-' || firstChar == '+') {
+            reverseVal.append (numStr.substring (0, 1));
+            numStr = numStr.substring (1, numStr.length ());
+        }
+        
+        char[] numArr = numStr.toCharArray ();
+        int len = numArr.length;
+        int indexEnd = len % 2 == 0 ? len / 2 : len / 2 + 1;
+        for (int i = 0; i < indexEnd; i++) {
+        
+        }
+        
         return 0;
     }
     

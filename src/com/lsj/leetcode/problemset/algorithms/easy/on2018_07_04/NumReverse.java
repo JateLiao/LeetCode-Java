@@ -28,7 +28,7 @@ public class NumReverse {
      *
      */
     public static void main(String[] args) {
-        int num = 1;
+        int num = -321;
         System.err.println("测试数字：" + num);
         long s = System.currentTimeMillis ();
         int values = new NumReverse ().reverse (num);
@@ -39,6 +39,7 @@ public class NumReverse {
     public int reverse(int x) {
         String numStr = String.valueOf (x);
         StringBuilder reverseVal = new StringBuilder ("");
+        long value = 0L;
         
         char firstChar = numStr.charAt (0); // 符号位
         if (firstChar == '-' || firstChar == '+') {
@@ -48,12 +49,16 @@ public class NumReverse {
         
         char[] numArr = numStr.toCharArray ();
         int len = numArr.length;
-        int indexEnd = len % 2 == 0 ? len / 2 : len / 2 + 1;
+        int indexEnd = len / 2;
         for (int i = 0; i < indexEnd; i++) {
-        
+            char c = numArr[i];
+            numArr[i] = numArr[len - 1 - i];
+            numArr[len - 1 - i] = c;
         }
         
-        return 0;
+        value = Long.valueOf (reverseVal.append (String.valueOf (numArr)).toString ());
+        
+        return (value >= Integer.MAX_VALUE || value <= Integer.MIN_VALUE) ? 0 : (int)value;
     }
     
 }

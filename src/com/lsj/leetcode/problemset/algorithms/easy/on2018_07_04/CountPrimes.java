@@ -20,15 +20,29 @@ public class CountPrimes {
      *
      */
     public static void main(String[] args) {
-        int num = 1;
+        int num = 5;
         System.err.println("测试数字：" + num);
         long s = System.currentTimeMillis ();
         int values = new CountPrimes ().countPrimes (num);
-        System.err.println("数量：" + values);
+        System.err.println("质数数量：" + values);
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
     
     public int countPrimes(int n) {
-        return 0;
+        int count = 0;
+        if (n < 0 || n == 1 || n == 2) {
+            return 0;
+        }
+    
+        for (int i = 2; i <= n; i++) {
+            if ((i % 2 == 0 || i % 3 == 0) && i != 1 && i != 2 && i != 3) {
+                continue;
+            }
+            // System.out.println(i);
+            count++;
+        }
+
+        
+        return count;
     }
 }

@@ -14,13 +14,14 @@ public class CountPrimes {
      *  输入: 10
      *  输出: 4
      *  解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+     *  /
      
      /**
      * Main Method: 请开始你的操作.
      *
      */
     public static void main(String[] args) {
-        int num = 5;
+        int num = 150000;
         System.err.println("测试数字：" + num);
         long s = System.currentTimeMillis ();
         int values = new CountPrimes ().countPrimes (num);
@@ -30,16 +31,21 @@ public class CountPrimes {
     
     public int countPrimes(int n) {
         int count = 0;
-        if (n < 0 || n == 1 || n == 2) {
+        if (n < 0) {
             return 0;
         }
     
-        for (int i = 2; i <= n; i++) {
-            if ((i % 2 == 0 || i % 3 == 0) && i != 1 && i != 2 && i != 3) {
-                continue;
+        for (int i = 2; i < n; i++) {
+            boolean isPrime = true;
+            for (int j = 2; j * j <= i ; j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
             }
-            // System.out.println(i);
-            count++;
+            if (isPrime) {
+                count++;
+            }
         }
 
         

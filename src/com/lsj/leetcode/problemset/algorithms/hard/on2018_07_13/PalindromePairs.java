@@ -1,6 +1,9 @@
 package com.lsj.leetcode.problemset.algorithms.hard.on2018_07_13;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Desc PalindromePairs
@@ -35,7 +38,7 @@ public class PalindromePairs {
      *
      */
     public static void main(String[] args) {
-        String[] str = {"", ""};
+        String[] str = {"abcd", "dcba", "lls", "s", "sssll"};
         System.err.println("测试数据：" + str.length);
         long s = System.currentTimeMillis ();
         List<List<Integer>> values = new PalindromePairs ().palindromePairs (str);
@@ -47,6 +50,40 @@ public class PalindromePairs {
     }
     
     public List<List<Integer>> palindromePairs(String[] words) {
-        return null;
+        if (null == words || words.length == 0) {
+            return null;
+        }
+        List<List<Integer>> result = new ArrayList<>();
+        Map<String, List<Integer>> indexMap = new HashMap<>(26);
+    
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            String firstChar = word.substring(0, 1);
+            if (!indexMap.containsKey(firstChar)) {
+                indexMap.put(firstChar, new ArrayList<Integer>());
+            }
+            indexMap.get(firstChar).add(i);
+        }
+    
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            String firstChar = word.substring(0, 1);
+            String lastChar = word.substring(word.length() - 1, word.length());
+            if (indexMap.containsKey(lastChar)) {
+                List<Integer> matchedList = indexMap.get(lastChar);
+                for (int j = 0; j < matchedList.size(); j++) {
+                    int index = matchedList.get(j);
+                    if (i == index) {
+                        continue;
+                    }
+                    List<Integer> element = new ArrayList<>();
+                    element.add(i);
+                    element.add(index);
+                    result.add(element);
+                }
+            }
+        }
+        
+        return result;
     }
 }

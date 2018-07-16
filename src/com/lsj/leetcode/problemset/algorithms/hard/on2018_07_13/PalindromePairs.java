@@ -58,19 +58,24 @@ public class PalindromePairs {
     
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
-            String firstChar = word.substring(0, 1);
-            if (!indexMap.containsKey(firstChar)) {
-                indexMap.put(firstChar, new ArrayList<Integer>());
+            if (null == word || word.isEmpty()) {
+                continue;
             }
-            indexMap.get(firstChar).add(i);
+            String lastChar = word.substring(word.length() - 1, word.length());
+            if (!indexMap.containsKey(lastChar)) {
+                indexMap.put(lastChar, new ArrayList<Integer>());
+            }
+            indexMap.get(lastChar).add(i);
         }
     
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
+            if (null == word || word.isEmpty()) {
+                continue;
+            }
             String firstChar = word.substring(0, 1);
-            String lastChar = word.substring(word.length() - 1, word.length());
-            if (indexMap.containsKey(lastChar)) {
-                List<Integer> matchedList = indexMap.get(lastChar);
+            if (indexMap.containsKey(firstChar)) {
+                List<Integer> matchedList = indexMap.get(firstChar);
                 for (int j = 0; j < matchedList.size(); j++) {
                     int index = matchedList.get(j);
                     if (i == index) {

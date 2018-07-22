@@ -29,23 +29,32 @@ public class ReverseLinkedList2 {
      */
     public static void main(String[] args) {
         long s = System.currentTimeMillis ();
-        int[] arr = {1, 5, 8, 9, 3, 0};
-        int m = 0, n = 0;
-        
-        
-        System.err.println ("测试数据：" + arr.toString ());
-        ListNode head = new ListNode(arr[0]);
+        int[] arr = {1, 2, 3, 4, 5, 0};
+        ListNode head = new ListNode (arr[0]);
         ListNode tmpHead = head;
         for (int i = 1; i < arr.length; i++) {
             ListNode tmp = new ListNode (arr[i]);
-            tmpHead = new ListNode (arr[i]);
             tmpHead.next = tmp;
             tmpHead = tmp;
         }
-        tmpHead.next = null;
-        
+        // tmpHead.next = null;
+        System.err.print ("测试数据：");
+        showNodes (head);
+        int m = 1, n = 2;
         ListNode values = new ReverseLinkedList2 ().reverseBetween (head, m, n);
+        System.err.print("结果：");
+        showNodes (head);
         System.err.println ("耗时：" + String.valueOf (System.currentTimeMillis () - s));
+    }
+    
+    public static void showNodes(ListNode head) {
+        StringBuilder sb = new StringBuilder ();
+        while (head != null) {
+            sb.append (head.val).append (" -> ");
+            head = head.next;
+        }
+        sb.append ("NULL");
+        System.out.println (sb.toString ());
     }
     
     /**
@@ -57,8 +66,55 @@ public class ReverseLinkedList2 {
      * }
      */
     public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (null == head || head.next == null) {
+            return null;
+        }
+        ListNode tmpHead = head;
+        ListNode tmpNodePriv = tmpHead;
+        ListNode nodeM = null; // 第m个节点
+        ListNode nodeMPriv = null; // 第m-1个节点
+        ListNode nodeMN = null; // 第 m+1 个节点
+        ListNode nodeN = null; // 第n个节点
+        ListNode nodeNPriv = null; // 第n - 1个节点
+        ListNode nodeNN = null; // 第 n+1 个节点
+        int index = 1;
+        while (null != tmpHead.next) {
+            if (m == index) {
+                nodeM = tmpHead;
+                nodeMN = tmpNodePriv.next;
+                nodeMPriv = tmpNodePriv;
+            }
+            
+            if (n == index) {
+                nodeN = tmpHead;
+                nodeMPriv = tmpNodePriv;
+                nodeNN = tmpHead.next;
+                break; // m <= n
+            }
+            ++index;
+            tmpNodePriv = tmpHead; // 记录上一个节点
+            tmpHead = tmpHead.next;
+        }
         
-        return null;
+        // 进行倒置转换
+        ListNode nodeMNext = nodeM.next;
+        ListNode nodeNNext = nodeN.next;
+        if (m == 1) {
+        
+        } else {
+        
+        }
+        
+        if (n == 1) {
+        
+        } else {
+        
+        }
+        
+        nodeMPriv.next = nodeN;
+        nodeNPriv.next = nodeM;
+        
+        return head;
     }
     
     /**
@@ -68,8 +124,9 @@ public class ReverseLinkedList2 {
         int val;
         ListNode next;
         
-        public ListNode() { }
-    
+        public ListNode() {
+        }
+        
         public ListNode(int x) {
             val = x;
         }

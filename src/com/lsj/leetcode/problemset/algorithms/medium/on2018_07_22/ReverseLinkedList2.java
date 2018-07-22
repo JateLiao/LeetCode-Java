@@ -28,13 +28,24 @@ public class ReverseLinkedList2 {
      *
      */
     public static void main(String[] args) {
-        String[] str = {"abcd", "dcba", "lls", "s", "sssll"};
-        System.err.println("测试数据：" + str.length);
-        ListNode node = null;
-        int m = 0, n = 0;
         long s = System.currentTimeMillis ();
-        ListNode values = new ReverseLinkedList2 ().reverseBetween(null, m, n);
-        System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
+        int[] arr = {1, 5, 8, 9, 3, 0};
+        int m = 0, n = 0;
+        
+        
+        System.err.println ("测试数据：" + arr.toString ());
+        ListNode head = new ListNode(arr[0]);
+        ListNode tmpHead = head;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode tmp = new ListNode (arr[i]);
+            tmpHead = new ListNode (arr[i]);
+            tmpHead.next = tmp;
+            tmpHead = tmp;
+        }
+        tmpHead.next = null;
+        
+        ListNode values = new ReverseLinkedList2 ().reverseBetween (head, m, n);
+        System.err.println ("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
     
     /**
@@ -46,17 +57,20 @@ public class ReverseLinkedList2 {
      * }
      */
     public ListNode reverseBetween(ListNode head, int m, int n) {
-    
+        
         return null;
     }
     
     /**
      * 链表节点定义.
      */
-    private class ListNode {
+    static class ListNode {
         int val;
         ListNode next;
-        ListNode(int x) {
+        
+        public ListNode() { }
+    
+        public ListNode(int x) {
             val = x;
         }
     }

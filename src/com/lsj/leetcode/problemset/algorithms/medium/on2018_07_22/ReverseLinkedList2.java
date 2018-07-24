@@ -40,7 +40,8 @@ public class ReverseLinkedList2 {
         // tmpHead.next = null;
         System.err.print ("测试数据：");
         showNodes (head);
-        int m = 1, n = 2;
+        int m = 2, n = 3;
+        System.out.println("m = " + m + ", n = " + n);
         ListNode values = new ReverseLinkedList2 ().reverseBetween (head, m, n);
         System.err.print("结果：");
         showNodes (head);
@@ -69,6 +70,9 @@ public class ReverseLinkedList2 {
         if (null == head || head.next == null) {
             return null;
         }
+        if (m == n) {
+            return head;
+        }
         ListNode tmpHead = head;
         ListNode tmpNodePriv = tmpHead;
         ListNode nodeM = null; // 第m个节点
@@ -81,14 +85,15 @@ public class ReverseLinkedList2 {
         while (null != tmpHead.next) {
             if (m == index) {
                 nodeM = tmpHead;
-                nodeMN = tmpNodePriv.next;
+                nodeMN = tmpHead.next;
                 nodeMPriv = tmpNodePriv;
             }
             
             if (n == index) {
                 nodeN = tmpHead;
-                nodeMPriv = tmpNodePriv;
                 nodeNN = tmpHead.next;
+                nodeNPriv = tmpNodePriv;
+                
                 break; // m <= n
             }
             ++index;
@@ -97,8 +102,18 @@ public class ReverseLinkedList2 {
         }
         
         // 进行倒置转换
-        ListNode nodeMNext = nodeM.next;
-        ListNode nodeNNext = nodeN.next;
+    
+    
+        if (m == n) {
+        
+        } else {
+            nodeMPriv.next = nodeN;
+            nodeMPriv.next.next = nodeMN;
+    
+            nodeNPriv.next = nodeM;
+            nodeNPriv.next.next = nodeNN;
+        }
+        
         if (m == 1) {
         
         } else {
@@ -110,9 +125,6 @@ public class ReverseLinkedList2 {
         } else {
         
         }
-        
-        nodeMPriv.next = nodeN;
-        nodeNPriv.next = nodeM;
         
         return head;
     }
@@ -129,6 +141,31 @@ public class ReverseLinkedList2 {
         
         public ListNode(int x) {
             val = x;
+        }
+    
+        @Override
+        public String toString() {
+            return String.valueOf(this.val);
+        }
+    
+        /**
+         * 获取字段值： val.
+         *
+         * @return 返回字段值： val.
+         */
+        public int getVal() {
+            return val;
+        }
+    
+        /**
+         * 设置字段值： val.
+         *
+         * <p>You can use getVal() to get the value of val</p>
+         *
+         * @param val val
+         */
+        public void setVal(int val) {
+            this.val = val;
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.lsj.leetcode.problemset.algorithms.medium.on2018_07_22;
 
+import java.util.HashMap;
+
 /**
  * @Title: ${FILE_NAME}
  * @Company: com.lsj
@@ -28,6 +30,7 @@ public class ReverseLinkedList2 {
      *
      */
     public static void main(String[] args) {
+        // HashMap
         long s = System.currentTimeMillis ();
         int[] arr = {1, 2, 3, 4, 5, 0};
         ListNode head = new ListNode (arr[0]);

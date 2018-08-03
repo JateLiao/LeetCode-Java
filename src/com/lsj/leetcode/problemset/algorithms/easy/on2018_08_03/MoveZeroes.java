@@ -1,5 +1,7 @@
 package com.lsj.leetcode.problemset.algorithms.easy.on2018_08_03;
 
+import com.lsj.leetcode.util.ArrayUtils;
+
 /**
  * @Desc MoveZeroes
  * @ProjectName LeetCode-Java
@@ -24,11 +26,13 @@ public class MoveZeroes {
      *
      */
     public static void main(String[] args) {
-        int[] nums = {};
-        System.err.println("测试数据：" + nums);
+        int[] nums = {0, 1, 2};
+        System.err.println("测试数据：");
+        ArrayUtils.showArrays(nums);
         long s = System.currentTimeMillis ();
         new MoveZeroes ().moveZeroes (nums);
-        System.err.println("结果：" + nums);
+        System.err.println("结果：");
+        ArrayUtils.showArrays(nums);
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
     

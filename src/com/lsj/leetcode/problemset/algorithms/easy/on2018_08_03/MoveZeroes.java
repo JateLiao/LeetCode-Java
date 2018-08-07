@@ -26,7 +26,7 @@ public class MoveZeroes {
      *
      */
     public static void main(String[] args) {
-        int[] nums = {0, 1, 2};
+        int[] nums = {0, 1, 0, 2, 9, 0, 0, 0, 24};
         System.err.println("测试数据：");
         ArrayUtils.showArrays(nums);
         long s = System.currentTimeMillis ();
@@ -37,6 +37,28 @@ public class MoveZeroes {
     }
     
     public void moveZeroes(int[] nums) {
-    
+        if (null == nums) {
+            return;
+        }
+        int len = nums.length;
+        int replacedIndex = 0; // 要被替换的index
+        int targetIndex = 0; // 目标index
+        for (int i = 0; i < len - 1; i++) {
+            if (nums[i] != 0) {
+                continue;
+            }
+            replacedIndex = i;
+            targetIndex = i + 1;
+            for (; targetIndex < len; targetIndex++) {
+                if (nums[targetIndex] != 0) {
+                    break;
+                }
+            }
+            
+            // 找到待移动的非零数
+            int tmp = nums[replacedIndex];
+            nums[replacedIndex] = nums[targetIndex];
+            nums[targetIndex] = tmp;
+        }
     }
 }

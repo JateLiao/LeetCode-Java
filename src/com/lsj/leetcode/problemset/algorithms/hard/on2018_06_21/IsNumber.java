@@ -12,6 +12,9 @@ import java.util.Set;
  */
 public class IsNumber {
     /**
+     * 通过
+     *
+     *
      * 验证给定的字符串是否为数字。
      * 例如:
      * "0" => true

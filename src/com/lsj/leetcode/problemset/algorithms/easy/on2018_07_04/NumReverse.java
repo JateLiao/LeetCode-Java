@@ -9,6 +9,8 @@ package com.lsj.leetcode.problemset.algorithms.easy.on2018_07_04;
  */
 public class NumReverse {
     /**
+     * 通过
+     *
      * 给定一个 32 位有符号整数，将整数中的数字进行反转。
      * 示例 1:
      * 输入: 123

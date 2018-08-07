@@ -48,11 +48,15 @@ public class MoveZeroes {
                 continue;
             }
             replacedIndex = i;
-            targetIndex = i + 1;
+            targetIndex = targetIndex == 0 ? i + 1 : targetIndex;
             for (; targetIndex < len; targetIndex++) {
                 if (nums[targetIndex] != 0) {
                     break;
                 }
+            }
+            
+            if (targetIndex >= len) { // 说明后面的位置已经全部是0
+                break;
             }
             
             // 找到待移动的非零数

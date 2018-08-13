@@ -1,6 +1,8 @@
 package com.lsj.leetcode.problemset.algorithms.medium.on2018_07_22;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Title: ${FILE_NAME}
@@ -85,6 +87,9 @@ public class ReverseLinkedList2 {
         ListNode nodeNPriv = null; // 第n - 1个节点
         ListNode nodeNN = null; // 第 n+1 个节点
         int index = 1;
+    
+        List<ListNode> reverseNodes = new ArrayList<>(n - m);
+        
         while (null != tmpHead.next) {
             if (m == index) {
                 nodeM = tmpHead;
@@ -99,35 +104,18 @@ public class ReverseLinkedList2 {
                 
                 break; // m <= n
             }
-            ++index;
             tmpNodePriv = tmpHead; // 记录上一个节点
             tmpHead = tmpHead.next;
+            
+            if (index >= m && index <= n) {
+                reverseNodes.add(tmpHead);
+                ++index;
+                continue;
+            }
+            break;
         }
         
         // 进行倒置转换
-    
-    
-        if (m == n) {
-        
-        } else {
-            nodeMPriv.next = nodeN;
-            nodeMPriv.next.next = nodeMN;
-    
-            nodeNPriv.next = nodeM;
-            nodeNPriv.next.next = nodeNN;
-        }
-        
-        if (m == 1) {
-        
-        } else {
-        
-        }
-        
-        if (n == 1) {
-        
-        } else {
-        
-        }
         
         return head;
     }

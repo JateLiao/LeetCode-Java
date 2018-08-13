@@ -33,7 +33,7 @@ public class ReverseLinkedList2 {
     public static void main(String[] args) {
         // HashMap
         long s = System.currentTimeMillis ();
-        int[] arr = {1, 2, 3, 4, 5, 0};
+        int[] arr = {5};
         ListNode head = new ListNode (arr[0]);
         ListNode tmpHead = head;
         for (int i = 1; i < arr.length; i++) {
@@ -44,7 +44,7 @@ public class ReverseLinkedList2 {
         // tmpHead.next = null;
         System.err.print("测试数据：");
         showNodes(head);
-        int m = 1, n = 4;
+        int m = 1, n = 1;
         System.out.println("m = " + m + ", n = " + n);
         ListNode values = new ReverseLinkedList2().reverseBetween(head, m, n);
         System.err.print("结果：");
@@ -71,7 +71,7 @@ public class ReverseLinkedList2 {
      * }
      */
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (null == head || head.next == null) {
+        if (null == head) {
             return null;
         }
         if (m == n) {
@@ -79,51 +79,54 @@ public class ReverseLinkedList2 {
         }
         ListNode tmpHead = head;
         ListNode tmpNodePriv = tmpHead;
-        ListNode nodeM = null; // 第m个节点
         ListNode nodeMPriv = null; // 第m-1个节点
-        ListNode nodeMN = null; // 第 m+1 个节点
-        ListNode nodeN = null; // 第n个节点
-        ListNode nodeNPriv = null; // 第n - 1个节点
         ListNode nodeNN = null; // 第 n+1 个节点
         int index = 1;
     
-        List<ListNode> reverseNodes = new ArrayList<>(n - m);
-        while (null != tmpHead.next) {
+        List<ListNode> reverseNodes = new ArrayList<>(n - m + 1);
+        while (null != tmpHead && index <= n) {
             if (m == index) {
-                nodeM = tmpHead;
-                nodeMN = tmpHead.next;
                 nodeMPriv = tmpNodePriv;
             }
             
             if (n == index) {
-                nodeN = tmpHead;
                 nodeNN = tmpHead.next;
-                nodeNPriv = tmpNodePriv;
             }
             tmpNodePriv = tmpHead; // 记录上一个节点
             if (index >= m && index <= n) {
                 reverseNodes.add(tmpHead);
-                tmpHead = tmpHead.next;
-                ++index;
-                continue;
             }
-            break;
+            tmpHead = tmpHead.next;
+            ++index;
         }
         
         // 进行倒置转换
+        ListNode resultNode = head;
         int len = reverseNodes.size();
         if (len >= 1) {
-            tmpHead = nodeMPriv;
-            for (int i = len - 1; i >= 1; i--) {
+            int start = 0;
+            if (m != 1) { // // 从头结点开始反转
+                tmpHead = nodeMPriv;
+                start = len - 1;
+            } else {
+                tmpHead = reverseNodes.get(len - 1);
+                resultNode = tmpHead;
+                start = len - 2;
+            }
+            for (int i = start; i >= 1; i--) {
                 tmpHead.next = reverseNodes.get(i);
                 reverseNodes.get(i).next = reverseNodes.get(i - 1);
                 tmpHead = tmpHead.next;
             }
             tmpHead.next = reverseNodes.get(0);
-            tmpHead.next.next = nodeNN;
+            if (n == index) { // 到尾节点结束
+                tmpHead.next.next = null;
+            } else {
+                tmpHead.next.next = nodeNN;
+            }
         }
         
-        return head;
+        return resultNode;
     }
     
     /**
@@ -143,26 +146,6 @@ public class ReverseLinkedList2 {
         @Override
         public String toString() {
             return String.valueOf(this.val);
-        }
-    
-        /**
-         * 获取字段值： val.
-         *
-         * @return 返回字段值： val.
-         */
-        public int getVal() {
-            return val;
-        }
-    
-        /**
-         * 设置字段值： val.
-         *
-         * <p>You can use getVal() to get the value of val</p>
-         *
-         * @param val val
-         */
-        public void setVal(int val) {
-            this.val = val;
         }
     }
 }

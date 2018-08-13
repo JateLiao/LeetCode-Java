@@ -1,7 +1,6 @@
 package com.lsj.leetcode.problemset.algorithms.medium.on2018_07_22;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,14 +42,14 @@ public class ReverseLinkedList2 {
             tmpHead = tmp;
         }
         // tmpHead.next = null;
-        System.err.print ("测试数据：");
-        showNodes (head);
-        int m = 2, n = 3;
+        System.err.print("测试数据：");
+        showNodes(head);
+        int m = 1, n = 4;
         System.out.println("m = " + m + ", n = " + n);
-        ListNode values = new ReverseLinkedList2 ().reverseBetween (head, m, n);
+        ListNode values = new ReverseLinkedList2().reverseBetween(head, m, n);
         System.err.print("结果：");
-        showNodes (head);
-        System.err.println ("耗时：" + String.valueOf (System.currentTimeMillis () - s));
+        showNodes(values);
+        System.err.println("耗时：" + String.valueOf(System.currentTimeMillis() - s));
     }
     
     public static void showNodes(ListNode head) {
@@ -89,7 +88,6 @@ public class ReverseLinkedList2 {
         int index = 1;
     
         List<ListNode> reverseNodes = new ArrayList<>(n - m);
-        
         while (null != tmpHead.next) {
             if (m == index) {
                 nodeM = tmpHead;
@@ -101,14 +99,11 @@ public class ReverseLinkedList2 {
                 nodeN = tmpHead;
                 nodeNN = tmpHead.next;
                 nodeNPriv = tmpNodePriv;
-                
-                break; // m <= n
             }
             tmpNodePriv = tmpHead; // 记录上一个节点
-            tmpHead = tmpHead.next;
-            
             if (index >= m && index <= n) {
                 reverseNodes.add(tmpHead);
+                tmpHead = tmpHead.next;
                 ++index;
                 continue;
             }
@@ -116,6 +111,17 @@ public class ReverseLinkedList2 {
         }
         
         // 进行倒置转换
+        int len = reverseNodes.size();
+        if (len >= 1) {
+            tmpHead = nodeMPriv;
+            for (int i = len - 1; i >= 1; i--) {
+                tmpHead.next = reverseNodes.get(i);
+                reverseNodes.get(i).next = reverseNodes.get(i - 1);
+                tmpHead = tmpHead.next;
+            }
+            tmpHead.next = reverseNodes.get(0);
+            tmpHead.next.next = nodeNN;
+        }
         
         return head;
     }

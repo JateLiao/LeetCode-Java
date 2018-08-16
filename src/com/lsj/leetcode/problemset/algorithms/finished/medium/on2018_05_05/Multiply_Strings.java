@@ -17,8 +17,9 @@ public class Multiply_Strings {
         String num1 = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999";
         String num2 = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999";
         System.out.println("相加结果：" + bigNumberAdd(num1, num2));
-        
+        long s = System.currentTimeMillis();
         System.err.println("相乘结果：" + new Multiply_Strings ().multiply (num1, num2));
+        System.out.println("耗时：" + (System.currentTimeMillis() - s));
     }
     
     /**

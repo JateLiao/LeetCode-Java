@@ -38,7 +38,7 @@ public class PalindromePairs {
      *
      */
     public static void main(String[] args) {
-        String[] str = {"abcd", "dcba", "lls", "s", "sssll"};
+        String[] str = {"a", ""};
         System.err.println("测试数据：" + str.length);
         long s = System.currentTimeMillis ();
         List<List<Integer>> values = new PalindromePairs ().palindromePairs (str);
@@ -49,46 +49,87 @@ public class PalindromePairs {
         System.err.println("耗时：" + String.valueOf (System.currentTimeMillis () - s));
     }
     
+    
     public List<List<Integer>> palindromePairs(String[] words) {
-        if (null == words || words.length == 0) {
+        if (null == words || words.length < 1) {
             return null;
         }
         List<List<Integer>> result = new ArrayList<>();
-        Map<String, List<Integer>> indexMap = new HashMap<>(26);
-    
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            if (null == word || word.isEmpty()) {
-                continue;
-            }
-            String lastChar = word.substring(word.length() - 1, word.length());
-            if (!indexMap.containsKey(lastChar)) {
-                indexMap.put(lastChar, new ArrayList<Integer>());
-            }
-            indexMap.get(lastChar).add(i);
-        }
-    
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
-            if (null == word || word.isEmpty()) {
-                continue;
-            }
-            String firstChar = word.substring(0, 1);
-            if (indexMap.containsKey(firstChar)) {
-                List<Integer> matchedList = indexMap.get(firstChar);
-                for (int j = 0; j < matchedList.size(); j++) {
-                    int index = matchedList.get(j);
-                    if (i == index) {
-                        continue;
-                    }
+        int wlen = words.length;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < wlen; i++) {
+            for (int j = 0; j < wlen; j++) {
+                if (i == j) {
+                    continue;
+                }
+                builder.setLength(0);
+                String word = builder.append(words[i]).append(words[j]).toString();
+                if (isPalindrome(word)) {
                     List<Integer> element = new ArrayList<>();
                     element.add(i);
-                    element.add(index);
+                    element.add(j);
                     result.add(element);
                 }
             }
         }
-        
         return result;
     }
+    
+    private boolean isPalindrome(String word) {
+        if (word.length() == 1) {
+            return true;
+        }
+        int len = word.length() / 2; // word.length() % 2 == 0 ? word.length() / 2 : word.length() / 2 + 1;
+        char[] chars = word.toCharArray();
+        int allLen = chars.length;
+        for (int i = 0; i < len; i++) {
+            if (chars[i] != chars[allLen - 1 - i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //public List<List<Integer>> palindromePairs(String[] words) {
+    //    if (null == words || words.length == 0) {
+    //        return null;
+    //    }
+    //    List<List<Integer>> result = new ArrayList<>();
+    //    Map<String, List<Integer>> indexMap = new HashMap<>(26);
+    //
+    //    for (int i = 0; i < words.length; i++) {
+    //        String word = words[i];
+    //        if (null == word || word.isEmpty()) {
+    //            continue;
+    //        }
+    //        String lastChar = word.substring(word.length() - 1, word.length());
+    //        if (!indexMap.containsKey(lastChar)) {
+    //            indexMap.put(lastChar, new ArrayList<Integer>());
+    //        }
+    //        indexMap.get(lastChar).add(i);
+    //    }
+    //
+    //    for (int i = 0; i < words.length; i++) {
+    //        String word = words[i];
+    //        if (null == word || word.isEmpty()) {
+    //            continue;
+    //        }
+    //        String firstChar = word.substring(0, 1);
+    //        if (indexMap.containsKey(firstChar)) {
+    //            List<Integer> matchedList = indexMap.get(firstChar);
+    //            for (int j = 0; j < matchedList.size(); j++) {
+    //                int index = matchedList.get(j);
+    //                if (i == index) {
+    //                    continue;
+    //                }
+    //                List<Integer> element = new ArrayList<>();
+    //                element.add(i);
+    //                element.add(index);
+    //                result.add(element);
+    //            }
+    //        }
+    //    }
+    //
+    //    return result;
+    //}
 }

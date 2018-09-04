@@ -1,5 +1,7 @@
 package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_09_04;
 
+import com.lsj.leetcode.problemset.algorithms.common.ListNode;
+
 /**
  * @Desc RemoveNthNodeFromEndOfList
  * @ProjectName LeetCode-Java
@@ -33,25 +35,28 @@ public class RemoveNthNodeFromEndOfList {
      **/
     public static void main(String[] args) {
         
-        String str = "";
-        System.err.println("测试数据：" + str);
-        int n = 0;
+        // HashMap
         long s = System.currentTimeMillis();
-        ListNode node = RemoveNthNodeFromEndOfList.removeNthFromEnd(null, n);
-        System.err.println("结果：" + node);
+        int[] arr = {1, 2, 3, 4, 5};
+        ListNode head = new ListNode(arr[0]);
+        ListNode tmpHead = head;
+        for (int i = 1; i < arr.length; i++) {
+            ListNode tmp = new ListNode(arr[i]);
+            tmpHead.next = tmp;
+            tmpHead = tmp;
+        }
+        // tmpHead.next = null;
+        System.err.print("测试数据：");
+        ListNode.showNodes(head);
+        int n = 1;
+        System.out.println("n = " + n);
+        ListNode node = RemoveNthNodeFromEndOfList.removeNthFromEnd(head, n);
+        System.err.print("结果：");
+        ListNode.showNodes(node);
         System.err.println("耗时：" + String.valueOf(System.currentTimeMillis() - s));
     }
     
     public static ListNode removeNthFromEnd(ListNode head, int n) {
         return null;
-    }
-    
-    class ListNode {
-        int val;
-        ListNode next;
-        
-        ListNode(int x) {
-            val = x;
-        }
     }
 }

@@ -1,5 +1,7 @@
 package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_07_22;
 
+import com.lsj.leetcode.problemset.algorithms.common.ListNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,23 +45,13 @@ public class ReverseLinkedList2 {
         }
         // tmpHead.next = null;
         System.err.print("测试数据：");
-        showNodes(head);
+        ListNode.showNodes(head);
         int m = 1, n = 1;
         System.out.println("m = " + m + ", n = " + n);
         ListNode values = new ReverseLinkedList2().reverseBetween(head, m, n);
         System.err.print("结果：");
-        showNodes(values);
+        ListNode.showNodes(values);
         System.err.println("耗时：" + String.valueOf(System.currentTimeMillis() - s));
-    }
-    
-    public static void showNodes(ListNode head) {
-        StringBuilder sb = new StringBuilder ();
-        while (head != null) {
-            sb.append (head.val).append (" -> ");
-            head = head.next;
-        }
-        sb.append ("NULL");
-        System.out.println (sb.toString ());
     }
     
     /**
@@ -127,25 +119,5 @@ public class ReverseLinkedList2 {
         }
         
         return resultNode;
-    }
-    
-    /**
-     * 链表节点定义.
-     */
-    static class ListNode {
-        int val;
-        ListNode next;
-        
-        public ListNode() {
-        }
-        
-        public ListNode(int x) {
-            val = x;
-        }
-    
-        @Override
-        public String toString() {
-            return String.valueOf(this.val);
-        }
     }
 }

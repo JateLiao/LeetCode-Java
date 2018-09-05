@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_09_04;
+package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_09_04;
 
 import com.lsj.leetcode.problemset.algorithms.common.ListNode;
 
@@ -40,7 +40,7 @@ public class RemoveNthNodeFromEndOfList {
         
         // HashMap
         long s = System.currentTimeMillis();
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = {1};
         ListNode head = new ListNode(arr[0]);
         ListNode tmpHead = head;
         for (int i = 1; i < arr.length; i++) {
@@ -51,7 +51,7 @@ public class RemoveNthNodeFromEndOfList {
         // tmpHead.next = null;
         System.err.print("测试数据：");
         ListNode.showNodes(head);
-        int n = 5;
+        int n = 1;
         System.out.println("n = " + n);
         ListNode node = RemoveNthNodeFromEndOfList.removeNthFromEnd(head, n);
         System.err.print("结果：");
@@ -74,12 +74,12 @@ public class RemoveNthNodeFromEndOfList {
             if (len == 1) {
                 return null;
             } else {
-                head = nodes.get(1);
+                nodes.get(len - 2).next = null;
             }
         } else if (n == len) {
-            nodes.get(n - 2).next = null;
+            head = nodes.get(1);
         } else {
-            nodes.get(n - 2).next = nodes.get(n);
+            nodes.get(len - n - 1).next = nodes.get(len - n + 1);
         }
         
         return head;

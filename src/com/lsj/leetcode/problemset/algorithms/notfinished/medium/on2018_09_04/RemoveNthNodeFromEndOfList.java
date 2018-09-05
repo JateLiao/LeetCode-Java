@@ -2,6 +2,9 @@ package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_09_04;
 
 import com.lsj.leetcode.problemset.algorithms.common.ListNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Desc RemoveNthNodeFromEndOfList
  * @ProjectName LeetCode-Java
@@ -57,6 +60,28 @@ public class RemoveNthNodeFromEndOfList {
     }
     
     public static ListNode removeNthFromEnd(ListNode head, int n) {
-        return null;
+        if (null == head) {
+            return null;
+        }
+        List<ListNode> nodes = new ArrayList<>();
+        ListNode node = head;
+        while (null != node.next) {
+            nodes.add(node);
+            node = node.next;
+        }
+        int len = nodes.size();
+        if (n == 1) {
+            if (len == 1) {
+                return null;
+            } else {
+                head = nodes.get(1);
+            }
+        } else if (n == len) {
+            nodes.get(n - 2).next = null;
+        } else {
+            nodes.get(n - 2).next = nodes.get(n);
+        }
+        
+        return head;
     }
 }

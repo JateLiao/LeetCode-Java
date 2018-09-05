@@ -51,7 +51,7 @@ public class RemoveNthNodeFromEndOfList {
         // tmpHead.next = null;
         System.err.print("测试数据：");
         ListNode.showNodes(head);
-        int n = 1;
+        int n = 5;
         System.out.println("n = " + n);
         ListNode node = RemoveNthNodeFromEndOfList.removeNthFromEnd(head, n);
         System.err.print("结果：");
@@ -65,7 +65,7 @@ public class RemoveNthNodeFromEndOfList {
         }
         List<ListNode> nodes = new ArrayList<>();
         ListNode node = head;
-        while (null != node.next) {
+        while (null != node) {
             nodes.add(node);
             node = node.next;
         }

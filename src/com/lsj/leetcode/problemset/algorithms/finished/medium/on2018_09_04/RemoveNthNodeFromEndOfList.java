@@ -40,14 +40,8 @@ public class RemoveNthNodeFromEndOfList {
         
         // HashMap
         long s = System.currentTimeMillis();
-        int[] arr = {1};
-        ListNode head = new ListNode(arr[0]);
-        ListNode tmpHead = head;
-        for (int i = 1; i < arr.length; i++) {
-            ListNode tmp = new ListNode(arr[i]);
-            tmpHead.next = tmp;
-            tmpHead = tmp;
-        }
+        int[] arr = {1, 2, 3, 4, 5};
+        ListNode head = ListNode.initListNodesByArray(arr);
         // tmpHead.next = null;
         System.err.print("测试数据：");
         ListNode.showNodes(head);

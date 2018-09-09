@@ -39,6 +39,10 @@ public class AddTwoNumbers {
      * @return
      */
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        
+        synchronized (ListNode.class) {
+            System.out.println("Hah!!");
+        }
         return null;
     }
     

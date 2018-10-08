@@ -24,7 +24,7 @@ public class RemoveDuplicateLetters {
      *
      */
     public static void main(String[] args) {
-        String str = "";
+        String str = "ddbbacca";
         System.err.println("测试数据：" + str);
         long s = System.currentTimeMillis ();
         String values = new RemoveDuplicateLetters ().removeDuplicateLetters (str);
@@ -33,6 +33,56 @@ public class RemoveDuplicateLetters {
     }
     
     public String removeDuplicateLetters(String s) {
-        return null;
+        String result = null;
+        
+        int[] charIndexArr = new int[26];
+        char[] charArr = s.toCharArray();
+        if (null != charArr && charArr.length > 0) {
+            int len = charArr.length;
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < len; i++) {
+                char c = charArr[i];
+                //int index = c;
+                if (charIndexArr[c] == 1) { // 出现过
+                
+                } else {
+                    stringBuilder.append(c);
+                }
+                
+                
+                charIndexArr[c] = 1; // 出现过的置1
+            }
+        }
+        
+        return result;
     }
+    
+    //public int[] ct;
+    //
+    //public String removeDuplicateLetters(String s) {
+    //    ct = new int[26];
+    //    return solve(s);
+    //}
+    //
+    //public String solve(String s) {
+    //    if (s == null || s.equals("")) {
+    //        return "";
+    //    }
+    //    Arrays.fill(ct, 0);
+    //    for (char cur : s.toCharArray()) {
+    //        ++ct[cur - 'a'];
+    //    }
+    //    int i = 0;
+    //    int pos = 0;
+    //    for (; i < s.length(); ++i) {
+    //        if (s.charAt(i) < s.charAt(pos)) {
+    //            pos = i;
+    //        }
+    //        --ct[s.charAt(i) - 'a'];
+    //        if (ct[s.charAt(i) - 'a'] == 0) {
+    //            break;
+    //        }
+    //    }
+    //    return s.charAt(pos) + solve(s.substring(pos + 1).replace("" + s.charAt(pos), ""));
+    //}
 }

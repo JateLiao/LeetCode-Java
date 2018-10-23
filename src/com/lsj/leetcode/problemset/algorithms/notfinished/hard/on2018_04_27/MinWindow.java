@@ -1,5 +1,8 @@
 package com.lsj.leetcode.problemset.algorithms.notfinished.hard.on2018_04_27;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Desc MinWindow
  * @ProjectName LeetCode-Java
@@ -23,29 +26,66 @@ public class MinWindow {
      *
      */
     public static void main(String[] args) {
-        String s = "wegdtzwabazduwwdysdetrrctotpcepalxdewzezbfewbabbseinxbqqplitpxtcwwhuyntbtzxwzyaufihclztckdwccpeyonumbpnuonsnnsjscrvpsqsftohvfnvtbphcgxyumqjzltspmphefzjypsvugqqjhzlnylhkdqmolggxvneaopadivzqnpzurmhpxqcaiqruwztroxtcnvhxqgndyozpcigzykbiaucyvwrjvknifufxducbkbsmlanllpunlyohwfsssiazeixhebipfcdqdrcqiwftutcrbxjthlulvttcvdtaiwqlnsdvqkrngvghupcbcwnaqiclnvnvtfihylcqwvderjllannflchdklqxidvbjdijrnbpkftbqgpttcagghkqucpcgmfrqqajdbynitrbzgwukyaqhmibpzfxmkoeaqnftnvegohfudbgbbyiqglhhqevcszdkokdbhjjvqqrvrxyvvgldtuljygmsircydhalrlgjeyfvxdstmfyhzjrxsfpcytabdcmwqvhuvmpssingpmnpvgmpletjzunewbamwiirwymqizwxlmojsbaehupiocnmenbcxjwujimthjtvvhenkettylcoppdveeycpuybekulvpgqzmgjrbdrmficwlxarxegrejvrejmvrfuenexojqdqyfmjeoacvjvzsrqycfuvmozzuypfpsvnzjxeazgvibubunzyuvugmvhguyojrlysvxwxxesfioiebidxdzfpumyon";
+        String s =
+                "wegdtzwabazduwwdysdetrrctotpcepalxdewzezbfewbabbseinxbqqplitpxtcwwhuyntbtzxwzyaufihclztckdwccpeyonumbpnuonsnnsjscrvpsqsftohvfnvtbphcgxyumqjzltspmphefzjypsvugqqjhzlnylhkdqmolggxvneaopadivzqnpzurmhpxqcaiqruwztroxtcnvhxqgndyozpcigzykbiaucyvwrjvknifufxducbkbsmlanllpunlyohwfsssiazeixhebipfcdqdrcqiwftutcrbxjthlulvttcvdtaiwqlnsdvqkrngvghupcbcwnaqiclnvnvtfihylcqwvderjllannflchdklqxidvbjdijrnbpkftbqgpttcagghkqucpcgmfrqqajdbynitrbzgwukyaqhmibpzfxmkoeaqnftnvegohfudbgbbyiqglhhqevcszdkokdbhjjvqqrvrxyvvgldtuljygmsircydhalrlgjeyfvxdstmfyhzjrxsfpcytabdcmwqvhuvmpssingpmnpvgmpletjzunewbamwiirwymqizwxlmojsbaehupiocnmenbcxjwujimthjtvvhenkettylcoppdveeycpuybekulvpgqzmgjrbdrmficwlxarxegrejvrejmvrfuenexojqdqyfmjeoacvjvzsrqycfuvmozzuypfpsvnzjxeazgvibubunzyuvugmvhguyojrlysvxwxxesfioiebidxdzfpumyon";
         String t = "ozgzyywxvtublcl";
-        long ss = System.currentTimeMillis ();
-        System.err.println("最小覆盖子串：" + new MinWindow ().minWindow (s, t));
         
-        System.err.println("耗时：" + (System.currentTimeMillis () - ss));
+        //s = "ADOBECODEBANC";
+        //t = "ABC";
+        long ss = System.currentTimeMillis();
+        System.err.println("最小覆盖子串：" + MinWindow.minWindow(s, t));
+        
+        System.err.println("耗时：" + (System.currentTimeMillis() - ss));
     }
     
-    public String minWindow(String s, String t) {
+    
+    public static String minWindow2(String s, String t) {
+        Map<Character, Integer> map = new HashMap<>();
+        int min = Integer.MAX_VALUE;
+        int minStart = 0, minEnd = 0;
+        int count = t.length();
+        for (char c : t.toCharArray()) {
+            map.put(c, map.containsKey(c) ? map.get(c) + 1 : 1);
+        }
+        int left = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char val = s.charAt(right);
+            if (map.containsKey(val)) {
+                map.put(val, map.get(val) - 1);
+                if (map.get(val) >= 0) {
+                    count--;
+                }
+            }
+            while (count == 0) {
+                if (right - left < min) {
+                    min = right - left;
+                    minStart = left;
+                    minEnd = right;
+                }
+                char temp = s.charAt(left);
+                if (map.containsKey(temp)) {
+                    map.put(temp, map.get(temp) + 1);
+                    if (map.get(temp) > 0) count++;
+                }
+                left++;
+            }
+        }
+        return min == Integer.MAX_VALUE ? "" : s.substring(minStart, minEnd + 1);
+    }
+    
+    
+    public static String minWindow(String s, String t) {
         int suitCount = 0;
         String res = "";
         if (s.length() < t.length()) {
             return res;
         }
         int len = Integer.MAX_VALUE;
-    
+        int t_len = t.length();
+        
         for (int i = 0; i < s.length(); i++) {
-            long ss = System.currentTimeMillis ();
-            for (int j = i; j < s.length(); j++) {
-                // System.out.print("i = " + i + ", j = " + j);
+            for (int j = i ; j < s.length(); j++) {
                 String tmpStr = s.substring(i, Math.min(j + 1, s.length()));
-                // System.out.println(" : " + tmpStr);
-            
                 if (tmpStr.length() >= t.length()) {
                     boolean isMatched = true;
                     String newTmpStr = new String(tmpStr);
@@ -57,10 +97,10 @@ public class MinWindow {
                         }
                         newTmpStr = newTmpStr.replaceFirst(chr, "");
                     }
-//                    if (isMatched) {
-//                        suitCount++;
-//                        System.out.println(tmpStr);
-//                    }
+                    //if (isMatched) {
+                    //    suitCount++;
+                    //    System.out.println(tmpStr);
+                    //}
                     
                     if (isMatched && tmpStr.length() < len) {
                         res = tmpStr;
@@ -68,11 +108,10 @@ public class MinWindow {
                     }
                 }
             }
-            // System.out.println("单次耗时：" + (System.currentTimeMillis () - ss));
         }
         
         System.out.println("匹配子串总数据：" + suitCount);
-    
+        
         return res;
     }
 }

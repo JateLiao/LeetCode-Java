@@ -19,9 +19,9 @@ public class Knapsack_01 {
      * main method.
      **/
     public static void main(String[] args) {
-        int[] w_arr = {2, 2, 6, 4, 5, 8}; // 价值
-        int[] v_arr = {6, 3, 5, 4, 6, 2}; // 体积
-        int n = 12;
+        int[] w_arr = {0, 2, 2, 6, 4, 5}; // 价值
+        int[] v_arr = {0, 6, 3, 5, 4, 6}; // 体积
+        int n = 10;
         int val = dp_findMax(w_arr, v_arr, n);
         System.out.println("最大价值：" + val);
     }
@@ -30,23 +30,26 @@ public class Knapsack_01 {
      * 动态规划.
      */
     private static int dp_findMax(int[] w_arr, int[] v_arr, int n) {
-        int i, w = 0;
+        int i, j = 0;
         int len = w_arr.length;
         int[][] rv = new int[len + 1][n + 1];
-        for (i = 0; i <= len; i++) {
-            for (w = 0; w <= n; w++) {
-                if (i == 0 || w == 0) { // 初始出口条件
-                    rv[i][w] = 0;
-                } else if (w_arr[i - 1] <= w) { // 背包空间足够，可以选择拿 或者 不拿，但是要拿价值最大的那个
-                    rv[i][w] = Math.max(v_arr[i - 1] + rv[i - 1][w - w_arr[i - 1]], rv[i - 1][w]);
-                } else { // 背包空间不足，选择不拿
-                    rv[i][w] = rv[i - 1][w]; // 和上一次选择保持一致，相当于跳过这次选择
-                }
+        int max = 0;
+        
+        for (i = 1; i < len; i++) {
+            for (j = 1; j <= n; j++) {
+                //if (i == 0 || j == 0) { // 从 1 开始计算
+                //    rv[i][j] = 0;
+                //} else
                 
+                if (j >= v_arr[i]) { // 背包空间足够，可以选择拿 或者 不拿，但是要拿价值最大的那个
+                    rv[i][j] = Math.max(rv[i - 1][j - v_arr[i]] + w_arr[i], rv[i - 1][j]);
+                } else { // 背包空间不足，选择不拿
+                    rv[i][j] = rv[i - 1][j]; // 和上一次选择保持一致，相当于跳过这次选择
+                }
+    
+                max = rv[i][j] >= max ? rv[i][j] : max;
             }
         }
-        
-        int max = rv[len][w - 1];
         return max;
     }
     

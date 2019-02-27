@@ -17,7 +17,7 @@ public class GP_on2019_02_27 {
      * main method.
      **/
     public static void main(String[] args) {
-        int n = 10;
+        int n = 5;
         List<String> pathes = generateParenthesis(n);
         System.out.println("对数：" + n);
         System.out.println("括号组成数量：" + pathes.size());
@@ -44,10 +44,10 @@ public class GP_on2019_02_27 {
      * rec_generateParenthesis.
      */
     private static void rec_generateParenthesis(int left, int right, String out, List<String> res) {
-        if (left > right) {
+        if (left > right) { // 左括号多于右括号
             return;
         }
-        if (left == 0 && right == 0) {
+        if (left == 0 && right == 0) { // 左右括号均剩余0，完成一对括号
             res.add(out);
         } else {
             if (left > 0) {

@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_05_02;
+package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_05_02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import java.util.Stack;
  *   "()(())",
  *   "()()()"]
  */
-public class Generate_Parentheses {
+public class Generate_Parentheses_New {
     
     /**
      * main method.
@@ -61,25 +61,37 @@ public class Generate_Parentheses {
         int len = n * 2;
         // Stack<Character> stack = new Stack<> ();
         for (int i = 1; i <= 2; i++) { // 左括号的开头序号：01；02，也就是12,13
-            int centreCount = n - 2 - 1; //   中间需要处理的数量，末尾一位固定用来遍历
+            int centreCount = n - 2 - 1; // 中间需要处理的数量，末尾一位固定用来遍历
             char[] pthesArr = new char[len];
             pthesArr[0] = LEFT_PATHE;
             pthesArr[i] = LEFT_PATHE;
             if (centreCount == 0 || n == 3) { // 当n=3
-                completePathes (parenthesis, pthesArr, i + 1, len - 2);
+                completePathes (parenthesis, pthesArr,   i + 1, len - 2);
                 fillRightPathes (pthesArr);
                 continue;
             }
             for (int j = 0; j < n; j++) { // 3,4,
+    
+                for (int k = centreCount; k > 0; k--) { //
+                    int lastStartIndex = i + centreCount;
+                    for (int l = lastStartIndex; l < len - 2 - 1; l++) {
+                    
+                    }
+                }
+                
+                /** 最后一个位置的填充补全 */
                 int index = i + j + 1;
-                char[] tmpArr = Arrays.copyOf (pthesArr, pthesArr.length);
-                // 补充到倒数第二个位置
-                int count = 0;
                 do {
-                    tmpArr[index] = LEFT_PATHE;
-                    index++;
-                } while (++count < centreCount);
-                completePathes (parenthesis, tmpArr, index, len - 2);
+                    char[] tmpArr = Arrays.copyOf (pthesArr, pthesArr.length);
+                    // 补充到倒数第二个位置
+                    int count = 0;
+                    do {
+                        tmpArr[index] = LEFT_PATHE;
+                        index++;
+                    } while (++count < centreCount);
+                    completePathes (parenthesis, tmpArr, index, len - 2);
+                    break;
+                } while (true);
             }
         }
         /************************************************************************************************************************/

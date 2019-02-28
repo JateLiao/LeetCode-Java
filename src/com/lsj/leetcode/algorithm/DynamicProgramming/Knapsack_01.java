@@ -19,8 +19,8 @@ public class Knapsack_01 {
      * main method.
      **/
     public static void main(String[] args) {
-        int[] w_arr = {0, 2, 2, 6, 4, 5}; // 价值
-        int[] v_arr = {0, 6, 3, 5, 4, 6}; // 体积
+        int[] w_arr = {2, 2, 6, 4, 5}; // 价值
+        int[] v_arr = {6, 3, 5, 4, 6}; // 体积
         int n = 10;
         int val = dp_findMax(w_arr, v_arr, n);
         System.out.println("最大价值：" + val);

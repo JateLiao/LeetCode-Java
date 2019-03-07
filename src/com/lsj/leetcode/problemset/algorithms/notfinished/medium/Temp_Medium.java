@@ -8,5 +8,5 @@ package com.lsj.leetcode.problemset.algorithms.notfinished.medium;
  * @Author liao
  * @Createtine 2019/3/710:14
  */
-public class Temp {
+public class Temp_Medium {
 }

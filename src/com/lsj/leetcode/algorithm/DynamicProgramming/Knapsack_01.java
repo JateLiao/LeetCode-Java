@@ -16,7 +16,7 @@ public class Knapsack_01 {
      */
     
     /**
-     * main method.
+     * main method.\
      **/
     public static void main(String[] args) {
         int[] w_arr = {2, 2, 6, 4, 5}; // 价值

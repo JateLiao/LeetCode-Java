@@ -1,9 +1,9 @@
-package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_08_17;
+package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_08_17;
 
 /**
  * @Title: ${FILE_NAME}
  * @Company: com.lsj
- * @Package com.lsj.leetcode.problemset.algorithms.notfinished.medium.on2018_08_17
+ * @Package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_08_17
  * @Description: ${TODO}
  * @Author liao
  * @Createtine 2018/8/170:13
@@ -29,7 +29,7 @@ public class AddTwoNumbers {
         ListNode l1 = null, lh1 = null;
         ListNode l2 = null, lh2 = null;
     
-        String str = "243";
+        String str = "18";
         System.out.println("测试数据：" + str);
         for (int i = str.length() - 1; i >= 0; i--) {
             ListNode node = new ListNode(Integer.valueOf("" + str.charAt(i)));
@@ -46,7 +46,7 @@ public class AddTwoNumbers {
     
     
     
-        str = "564";
+        str = "0";
         System.out.println("测试数据：" + str);
         for (int i = str.length() - 1; i >= 0; i--) {
             ListNode node = new ListNode(Integer.valueOf("" + str.charAt(i)));
@@ -67,7 +67,32 @@ public class AddTwoNumbers {
         ListNode node = AddTwoNumbers.addTwoNumbers(lh1, lh2);
         System.out.println("结果：");
         showListNode(node);
+        
+        node = official_addTwoNumbers(lh1, lh2);
+        System.out.println("结果(官方)：");
+        showListNode(node);
+        
         System.out.println("耗时：" + String.valueOf(System.currentTimeMillis() - s));
+    }
+    
+    public static ListNode official_addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1, q = l2, curr = dummyHead;
+        int carry = 0;
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            curr = curr.next;
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;
+        }
+        if (carry > 0) {
+            curr.next = new ListNode(carry);
+        }
+        return dummyHead.next;
     }
     
     /**

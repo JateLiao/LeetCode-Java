@@ -38,14 +38,24 @@ public class ImplementStrStr {
      * main method.
      **/
     public static void main(String[] args) {
-        String haystack = "hello";
-        String needle = "ll";
+        String haystack = "bacbababadababacambabacaddababacasdsd";
+        String needle = "ababaca";
         System.out.println("测试数据：" + haystack + ", " + needle);
+        long s1 = System.currentTimeMillis();
         int index = strStr_JDK(haystack, needle);
         System.out.println("结果：" + index);
+        System.out.println("耗时：" + (System.currentTimeMillis() - s1));
     
+    
+        s1 = System.currentTimeMillis();
         index = strStr(haystack, needle);
         System.out.println("结果(非JDK)：" + index);
+        System.out.println("耗时：" + (System.currentTimeMillis() - s1));
+    
+        s1 = System.currentTimeMillis();
+        index = KMP.indexOf(haystack, needle);
+        System.out.println("结果(KMP算法)：" + index);
+        System.out.println("耗时：" + (System.currentTimeMillis() - s1));
     }
     
     public static int strStr(String haystack, String needle) {

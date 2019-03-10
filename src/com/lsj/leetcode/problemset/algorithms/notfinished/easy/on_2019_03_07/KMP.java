@@ -16,7 +16,7 @@ public class KMP {
         }
         
         int[] next = new int[ptr.length()];
-        calNext(str, next, ptr.length());
+        calNext(ptr, next, ptr.length());
         
         int k = -1;
         for (int i = 0; i < str.length(); i++) {

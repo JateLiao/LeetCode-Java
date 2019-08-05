@@ -1,5 +1,8 @@
 package com.lsj.leetcode.problemset.algorithms.notfinished.hard.on2018_09_10;
 
+import java.util.Random;
+import java.util.UUID;
+
 /**
  * @Title: ${FILE_NAME}
  * @Company: com.lsj
@@ -25,15 +28,45 @@ public class NumberOfDigitOne {
      *
      */
     public static void main(String[] args) {
-        int n = 445;
+        String uuid = UUID.randomUUID().toString();
+        System.out.println(uuid);
+        System.out.println(uuid.split("\\-")[0]);
+        
+        String randomTime = String.valueOf(System.currentTimeMillis() + (new Random().nextInt(10) + 1));
+        System.out.println(randomTime);
+        
+        int n = 999999999;
         System.err.println("测试数据：" + n);
         long s = System.currentTimeMillis();
         int values = new NumberOfDigitOne().countDigitOne(n);
         System.err.println("结果：" + values);
-        System.err.println("耗时：" + String.valueOf(System.currentTimeMillis() - s));
+        System.err.println("耗时：" + (System.currentTimeMillis() - s));
     }
     
     public int countDigitOne(int n) {
-        return 0;
+        if (n <= 0) return 0;
+        long mod = 1;   // 记录置1的位置处于个位、十位、百位、千位等...
+        int count = 0;  // 记录1的数量
+        long front, back;
+        long curDigit;     // 记录当前位置的数字
+        while (mod <= n) {
+            front = n / (mod * 10);  // 得到某一个位数置1后的商，即当前数之前的部分
+            back = n % mod;          // 得到某一位数置1后的余数，即当前数之后的部分
+            curDigit = (n / mod) % 10;  // 当前置1的位置原来(置1之前)的数
+            
+            if (curDigit > 1) {
+                count += (front + 1) * mod; // 当前位置的数字>1时
+            }
+            if (curDigit == 1)   // 当前位置的数字=1时
+            {
+                count += (front * mod + back + 1);
+            }
+            if (curDigit == 0)   // 当前位置的数字=0时
+            {
+                count += front * mod;
+            }
+            mod *= 10;
+        }
+        return count;
     }
 }

@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.finished.easy.on2018_07_04;
+package com.lsj.leetcode.problemset.algorithms.finished.easy._2018_07;
 
 /**
  * @Desc CountPrimes

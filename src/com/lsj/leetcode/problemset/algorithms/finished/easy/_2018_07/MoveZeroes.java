@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.finished.easy.on2018_08_03;
+package com.lsj.leetcode.problemset.algorithms.finished.easy._2018_07;
 
 import com.lsj.leetcode.util.ArrayUtils;
 

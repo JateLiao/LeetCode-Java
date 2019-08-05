@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.finished.medium.on2018_04_22;
+package com.lsj.leetcode.problemset.algorithms.finished.medium._2018_04;
 
 /**
  * @Title: ${FILE_NAME}

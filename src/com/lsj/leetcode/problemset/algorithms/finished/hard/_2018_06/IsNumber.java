@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.finished.hard.on2018_06_21;
+package com.lsj.leetcode.problemset.algorithms.finished.hard._2018_06;
 
 import java.util.HashSet;
 import java.util.Set;

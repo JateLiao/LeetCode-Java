@@ -58,12 +58,11 @@ public class Maximum_Swap_670 {
             if (a == b) {
                 continue;
             }
-            // 找到剩下最大值的原始位置
+            // 找到最后一个剩下最大值的原始位置
             int index = 0;
             for (int j = i + 1; j < oriArr.length; j++) {
                 if (oriArr[j].equals(arr[i])) {
                     index = j;
-                    break;
                 }
             }
             // 交换

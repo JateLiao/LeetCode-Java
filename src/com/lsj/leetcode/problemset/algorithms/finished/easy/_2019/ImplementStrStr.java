@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.notfinished.easy._2019;
+package com.lsj.leetcode.problemset.algorithms.finished.easy._2019;
 
 /**
  * @Title: ${FILE_NAME}
@@ -32,62 +32,97 @@ public class ImplementStrStr {
      *
      * 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。
      */
-    
-    
+
+
     /**
      * main method.
      **/
     public static void main(String[] args) {
-        String haystack = "bacbababadababacambabacaddababacasdsd";
-        String needle = "ababaca";
+        String haystack = "mississippi";
+        String needle = "issip";
         System.out.println("测试数据：" + haystack + ", " + needle);
         long s1 = System.currentTimeMillis();
         int index = strStr_JDK(haystack, needle);
         System.out.println("结果：" + index);
         System.out.println("耗时：" + (System.currentTimeMillis() - s1));
-    
-    
+
+
         s1 = System.currentTimeMillis();
-        index = strStr(haystack, needle);
+        index = strStr2(haystack, needle);
         System.out.println("结果(非JDK)：" + index);
         System.out.println("耗时：" + (System.currentTimeMillis() - s1));
-    
+
         s1 = System.currentTimeMillis();
         index = KMP.indexOf(haystack, needle);
         System.out.println("结果(KMP算法)：" + index);
         System.out.println("耗时：" + (System.currentTimeMillis() - s1));
     }
-    
+
     public static int strStr(String haystack, String needle) {
-        if (null == needle || needle.isEmpty()) {
+        if (null == needle || needle.isEmpty() || haystack.equals(needle)) {
             return 0;
         }
-        
+
         char[] h_arr = haystack.toCharArray();
         char[] n_arr = needle.toCharArray();
-    
+
         int index_h = 0, index_n = 0;
         for (; index_h < h_arr.length; index_h++) {
             if (index_n == n_arr.length) { // 完全匹配完成
                 return index_h - index_n;
             }
-            
+
             if (h_arr[index_h] == n_arr[index_n]) {
                 index_n++;
             } else { // 出现不匹配
                 index_h -= index_n;
-                 index_n = 0;
+                index_n = 0;
             }
         }
-        
+
         return -1;
     }
-    
+
     public static int strStr_JDK(String haystack, String needle) {
         if (null == needle || needle.isEmpty()) {
             return 0;
         }
-        
+
         return haystack.indexOf(needle);
+    }
+
+    public static int strStr2(String haystack, String needle) {
+        if (null == needle || needle.isEmpty() || needle.equals(haystack)) {
+            return 0;
+        }
+        if (needle.length() > haystack.length()) {
+            return -1;
+        }
+
+        char[] h_arr = haystack.toCharArray();
+        char[] n_arr = needle.toCharArray();
+
+        for (int i = 0; i < h_arr.length; i++) {
+            if (h_arr[i] != n_arr[0]) {
+                continue;
+            }
+            boolean matched = true;
+            for (int j = 0; j < n_arr.length; j++) {
+                if (i + j > h_arr.length - 1) {
+                    matched = false;
+                    break;
+                }
+                if (n_arr[j] != h_arr[i + j]) {
+                    matched = false;
+                    break;
+                }
+            }
+            if (!matched) {
+                continue;
+            }
+            return i;
+        }
+
+        return -1;
     }
 }

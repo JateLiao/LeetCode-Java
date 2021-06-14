@@ -1,4 +1,4 @@
-package com.lsj.leetcode.problemset.algorithms.notfinished.easy._2019;
+package com.lsj.leetcode.problemset.algorithms.finished.easy._2019;
 
 /**
  * @Title: ${FILE_NAME}

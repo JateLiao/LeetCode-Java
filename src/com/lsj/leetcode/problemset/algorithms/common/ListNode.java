@@ -1,7 +1,5 @@
 package com.lsj.leetcode.problemset.algorithms.common;
 
-import java.util.List;
-
 /**
  * @Desc ListNode
  * @ProjectName LeetCode-Java
@@ -12,37 +10,42 @@ import java.util.List;
 public class ListNode {
     public int val;
     public ListNode next;
-    
+
     public ListNode(int x) {
         val = x;
     }
-    
+
+    public ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(this.val);
     }
-    
-    
+
+
     /**
      * showNodes.
      * @param head head.
      */
     public static void showNodes(ListNode head) {
-        StringBuilder sb = new StringBuilder ();
+        StringBuilder sb = new StringBuilder();
         while (head != null) {
-            sb.append (head.val).append (" -> ");
+            sb.append(head.val).append(" -> ");
             head = head.next;
         }
-        sb.append ("NULL");
-        System.out.println (sb.toString ());
+        sb.append("NULL");
+        System.out.println(sb.toString());
     }
-    
+
     /**
      * 根据数组生成一个链表，并返回头结点.
      * @param arr arr.
      * @return head.
      */
-    public static ListNode initListNodesByArray(int...arr) {
+    public static ListNode initListNodesByArray(int... arr) {
         if (null == arr || arr.length < 1) {
             return null;
         }
